@@ -55,9 +55,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <IncludePath>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\include;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\x64\vc15\lib;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\include;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\include;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\ffmpeg-4.1.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\lib\x64;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\ffmpeg-4.1.3\x64\lib;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Link>
+      <AdditionalDependencies>SDL2.lib;opencv_world420d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -86,13 +101,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <QtRcc Include="MultiPlayer.qrc" />
-    <QtUic Include="MultiPlayer.ui" />
-    <QtMoc Include="MultiPlayer.h" />
-    <ClCompile Include="MultiPlayer.cpp" />
-    <ClCompile Include="main.cpp" />
+    <QtUic Include="code\MultiPlayer.ui" />
+    <QtMoc Include="code\MultiPlayer.h" />
+    <ClCompile Include="code\MultiPlayer.cpp" />
+    <ClCompile Include="code\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="MaterialDark.qss" />
+    <None Include="qss\MaterialDark.qss" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

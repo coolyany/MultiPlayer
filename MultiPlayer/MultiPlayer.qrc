@@ -1,4 +1,9 @@
 <RCC>
-    <qresource prefix="MultiPlayer">
+    <qresource prefix="/tool">
+        <file>resource/points.png</file>
+        <file>resource/play.png</file>
+        <file>resource/pause.png</file>
+        <file>resource/play-back.png</file>
+        <file>resource/play-skip.png</file>
     </qresource>
 </RCC>

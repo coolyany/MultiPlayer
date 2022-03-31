@@ -26,27 +26,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="code\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\MultiPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="code\MultiPlayer.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="code\MultiPlayer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="qss\MaterialDark.qss">
+      <Filter>QSS</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <QtRcc Include="MultiPlayer.qrc">
       <Filter>Resource Files</Filter>
     </QtRcc>
-    <QtUic Include="MultiPlayer.ui">
-      <Filter>Form Files</Filter>
-    </QtUic>
-    <QtMoc Include="MultiPlayer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="MultiPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MaterialDark.qss">
-      <Filter>QSS</Filter>
-    </None>
   </ItemGroup>
 </Project>
