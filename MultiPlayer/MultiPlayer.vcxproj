@@ -55,8 +55,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\include;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\opencv420\x64\vc15\lib;D:\TEST\Test_Qt\multiplayer\MultiPlayer\3rd\SDL2-2.0.20\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\TEST\MultiPlayer\3rd\opencv420\include;D:\TEST\MultiPlayer\3rd\SDL2-2.0.20\include;D:\TEST\MultiPlayer\3rd\ffmpeg-4.1.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\TEST\MultiPlayer\3rd\opencv420\x64\vc15\lib;D:\TEST\MultiPlayer\3rd\SDL2-2.0.20\lib\x64;D:\TEST\MultiPlayer\3rd\ffmpeg-4.1.3\x64\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
@@ -70,8 +70,11 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>SDL2.lib;opencv_world420d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world420d.lib;SDL2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ClCompile>
+      <PreprocessorDefinitions>$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
     <ClCompile>
@@ -100,6 +103,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="code\Data.cpp" />
+    <ClCompile Include="code\SDLVideoThread.cpp" />
     <QtRcc Include="MultiPlayer.qrc" />
     <QtUic Include="code\MultiPlayer.ui" />
     <QtMoc Include="code\MultiPlayer.h" />
@@ -108,6 +113,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="qss\MaterialDark.qss" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\Data.h" />
+    <QtMoc Include="code\SDLVideoThread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

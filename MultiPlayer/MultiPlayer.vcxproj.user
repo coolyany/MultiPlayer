@@ -4,7 +4,7 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b..\3rd\SDL2-2.0.20\lib\x64%3b..\3rd\opencv420\x64\vc15\bin%3b$(PATH)
+    <LocalDebuggerEnvironment>PATH=$(QTDIR)\bin%3b../3rd/SDL2-2.0.20/lib/x64%3b../3rd/opencv420/x64/vc15/bin%3b../3rd/ffmpeg-4.1.3/x64/bin$(PATH)
 $(LocalDebuggerEnvironment)</LocalDebuggerEnvironment>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
