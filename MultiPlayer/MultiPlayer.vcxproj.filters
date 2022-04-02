@@ -38,12 +38,18 @@
     <ClCompile Include="code\Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="code\SDLVideo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="code\MultiPlayer.h">
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="code\SDLVideoThread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="code\SDLVideo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

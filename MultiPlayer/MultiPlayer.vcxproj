@@ -105,6 +105,7 @@
   <ItemGroup>
     <ClCompile Include="code\Data.cpp" />
     <ClCompile Include="code\SDLVideoThread.cpp" />
+    <ClCompile Include="code\SDLVideo.cpp" />
     <QtRcc Include="MultiPlayer.qrc" />
     <QtUic Include="code\MultiPlayer.ui" />
     <QtMoc Include="code\MultiPlayer.h" />
@@ -116,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Data.h" />
+    <QtMoc Include="code\SDLVideo.h" />
     <QtMoc Include="code\SDLVideoThread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
