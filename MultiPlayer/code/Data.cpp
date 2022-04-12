@@ -8,14 +8,28 @@ Data::Data(int width, int height)
 
 Data::~Data()
 {
+	for (auto item : vidFrame) {
+		delete item;
+		item = NULL;
+	}
 }
 
-void Data::addFrame(cv::Mat frame)
+void Data::addFrame(AVFrame* frame)
 {
 	vidFrame.enqueue(frame);
 }
 
-cv::Mat Data::popFrame()
+AVFrame* Data::popFrame()
 {
 	return vidFrame.dequeue();
+}
+
+void Data::setMediaPath(const QString & path)
+{
+	mediaPath = path;
+}
+
+void Data::setAVCodecContext(AVCodecContext * ic)
+{
+	m_ic = ic;
 }

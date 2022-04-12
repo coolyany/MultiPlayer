@@ -4,6 +4,7 @@
 #include "ui_MultiPlayer.h"
 #include <QButtonGroup>
 #include "SDLVideo.h"
+#include <QFileDialog>
 
 
 //#include "Data.h"
@@ -31,6 +32,7 @@ public:
 public slots:
 	void showCamera();
 	void closeCamera();
+	void openVideo();
 private:
     Ui::MultiPlayerClass ui;
 

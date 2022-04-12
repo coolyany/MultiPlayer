@@ -6,7 +6,7 @@
 MultiPlayer::MultiPlayer(QWidget *parent)
     : QMainWindow(parent),
 	  ScreenButton(NULL),
-	  sdlVideo(NULL)
+	sdlVideo(NULL)
 {
     ui.setupUi(this);
 	//ui.label_4->setStyleSheet("background-color: black");
@@ -53,8 +53,9 @@ void MultiPlayer::initTool()
 
 void MultiPlayer::initConnect()
 {
-	connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::showCamera);
+	//connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::showCamera);
 	connect(ui.buttonStopPlay, &QPushButton::clicked, this, &MultiPlayer::closeCamera);
+	connect(ui.action_file, &QAction::triggered, this, &MultiPlayer::openVideo);
 }
 
 //void MultiPlayer::initSDL()
@@ -140,6 +141,18 @@ void MultiPlayer::closeCamera()
 	//isCameraOpen = false;
 	//capture.release();
 	sdlVideo->endPlay();
+}
+
+void MultiPlayer::openVideo()
+{
+	std::cout << "***************************** " << std::endl;;
+	QString fileName = QFileDialog::getOpenFileName(this, tr("open local media"), ".", "*.avi *.mp4 *.wmv;;*.*");
+	std::cout << "file "<< fileName.toLocal8Bit().data() << std::endl;
+	if (fileName.isEmpty())
+	{
+		return;
+	}
+	sdlVideo->openVideo(fileName);
 }
 
 void MultiPlayer::showCamera()

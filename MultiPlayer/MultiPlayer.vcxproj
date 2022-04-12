@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.14.2_msvc2017_64</QtInstall>
-    <QtModules>core;gui;widgets</QtModules>
+    <QtModules>core;gui;qml;widgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -104,6 +104,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="code\Data.cpp" />
+    <ClCompile Include="code\DecodeThread.cpp" />
+    <ClCompile Include="code\pVideo.h" />
     <ClCompile Include="code\SDLVideoThread.cpp" />
     <ClCompile Include="code\SDLVideo.cpp" />
     <QtRcc Include="MultiPlayer.qrc" />
@@ -117,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Data.h" />
+    <ClInclude Include="code\DecodeThread.h" />
     <QtMoc Include="code\SDLVideo.h" />
     <QtMoc Include="code\SDLVideoThread.h" />
   </ItemGroup>

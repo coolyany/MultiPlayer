@@ -75,92 +75,161 @@ void SDLVideoThread::initVideo()
 		cap.set(cv::CAP_PROP_FRAME_WIDTH, m_data->m_width);
 		cap.set(cv::CAP_PROP_FRAME_HEIGHT, m_data->m_height);
 	}
-	else if (m_data->getPlayWay() == MEDIA) 
+	else if (m_data->getPlayWay() == MEDIA)
 	{
-		//封装格式上下文
-		ic = avformat_alloc_context();
-
-		//参数设置
-		AVDictionary *opts = NULL;
-		//设置rtsp流以tcp协议打开
-		av_dict_set(&opts, "rtsp_transport", "tcp", 0);
-
-		//网络延迟时间
-		av_dict_set(&opts, "max_delay", "500000", 0);
-		//av_dict_set(&opts, "stimeout", "3000000", 0);  //设置超时断开连接时间
-		//av_dict_set(&opts, "timeout", "3000000", 0);  //设置超时断开连接时间
-
-		av_dict_set(&opts, "max_delay", "5000000", 0);
-		av_dict_set(&opts, "buffer_size", "10240000", 0);
-
-		av_dict_set(&opts, "protocol_whitelist", "file,tcp,udp,rtp", 0);
-
-		if (avformat_open_input(&ic, path.toLocal8Bit(), 0, &opts) != 0)
-		{
-			qDebug() << "can not open video";
-			avformat_close_input(&ic);
-			return;
-		}
-		//获取流信息
-		if (avformat_find_stream_info(ic, 0) != 0)
-		{
-			qDebug() << "can not get video stream info";
-
-			return;
-		}
-		qDebug() << "msc ::" << ic->duration / (AV_TIME_BASE / 1000);
-
-		//打印视频流详细信息
-		av_dump_format(ic, 0, path.toLocal8Bit(), 0);
-
-		//获取视频流
-		videoStream = av_find_best_stream(ic, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
-		AVStream *as = ic->streams[videoStream];
-
-		cout << "===================================================" << endl;
-		cout << "codec_id = " << as->codecpar->codec_id << endl;
-		cout << "format = " << as->codecpar->format << endl;
-		cout << videoStream << "视频信息" << endl;
-		cout << "width = " << as->codecpar->width << endl;
-		cout << "height = " << as->codecpar->height << endl;
-		//帧率 fps 分数转换
-		cout << "video fps = " << r2d(as->avg_frame_rate) << endl;
-
-		//分配内存
-		AVCodecParameters *param = avcodec_parameters_alloc();
-		avcodec_parameters_copy(param, ic->streams[videoStream]->codecpar);
-
-		//找到解码器
-		AVCodec *vcodec = avcodec_find_decoder(param->codec_id);
-		if (!vcodec)
-		{
-			avcodec_parameters_free(&param);
-			cout << "can't find the codec id " << param->codec_id << endl;
-			return;
-		}
-		cout << "find the AVCodec " << param->codec_id << endl;
-
-		//申请AVCodecContext空间。需要传递一个编码器，也可以不传，但不会包含编码器。
-		codec = avcodec_alloc_context3(vcodec);
-		//该函数用于将流里面的参数，也就是AVStream里面的参数直接复制到AVCodecContext的上下文当中。
-		avcodec_parameters_to_context(codec, param);
-		avcodec_parameters_free(&param);
-		//八线程解码器
-		codec->thread_count = 8;
-
-		//打开解码器上下文
-		int re = avcodec_open2(codec, vcodec, 0);
-		if (re != 0)
-		{
-			avcodec_free_context(&codec);
-			char buf[1024] = { 0 };
-			av_strerror(re, buf, sizeof(buf) - 1);
-			cout << "avcodec_open2 failed! :" << buf << endl;
-			return;
-		}
-		cout << " avcodec_open2 success!" << endl;
-		//decodeStream();//解码
+		initDecode();
 	}
+	//else if (m_data->getPlayWay() == MEDIA) 
+	//{
+	//	//封装格式上下文
+	//	ic = avformat_alloc_context();
+
+	//	//参数设置
+	//	AVDictionary *opts = NULL;
+	//	//设置rtsp流以tcp协议打开
+	//	av_dict_set(&opts, "rtsp_transport", "tcp", 0);
+
+	//	//网络延迟时间
+	//	av_dict_set(&opts, "max_delay", "500000", 0);
+	//	//av_dict_set(&opts, "stimeout", "3000000", 0);  //设置超时断开连接时间
+	//	//av_dict_set(&opts, "timeout", "3000000", 0);  //设置超时断开连接时间
+
+	//	av_dict_set(&opts, "max_delay", "5000000", 0);
+	//	av_dict_set(&opts, "buffer_size", "10240000", 0);
+
+	//	av_dict_set(&opts, "protocol_whitelist", "file,tcp,udp,rtp", 0);
+
+	//	if (avformat_open_input(&ic, path.toLocal8Bit(), 0, &opts) != 0)
+	//	{
+	//		qDebug() << "can not open video";
+	//		avformat_close_input(&ic);
+	//		return;
+	//	}
+	//	//获取流信息
+	//	if (avformat_find_stream_info(ic, 0) != 0)
+	//	{
+	//		qDebug() << "can not get video stream info";
+
+	//		return;
+	//	}
+	//	qDebug() << "msc ::" << ic->duration / (AV_TIME_BASE / 1000);
+
+	//	//打印视频流详细信息
+	//	av_dump_format(ic, 0, path.toLocal8Bit(), 0);
+
+	//	//获取视频流
+	//	videoStream = av_find_best_stream(ic, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
+	//	AVStream *as = ic->streams[videoStream];
+
+	//	cout << "===================================================" << endl;
+	//	cout << "codec_id = " << as->codecpar->codec_id << endl;
+	//	cout << "format = " << as->codecpar->format << endl;
+	//	cout << videoStream << "视频信息" << endl;
+	//	cout << "width = " << as->codecpar->width << endl;
+	//	cout << "height = " << as->codecpar->height << endl;
+	//	//帧率 fps 分数转换
+	//	cout << "video fps = " << r2d(as->avg_frame_rate) << endl;
+
+	//	//分配内存
+	//	AVCodecParameters *param = avcodec_parameters_alloc();
+	//	avcodec_parameters_copy(param, ic->streams[videoStream]->codecpar);
+
+	//	//找到解码器
+	//	AVCodec *vcodec = avcodec_find_decoder(param->codec_id);
+	//	if (!vcodec)
+	//	{
+	//		avcodec_parameters_free(&param);
+	//		cout << "can't find the codec id " << param->codec_id << endl;
+	//		return;
+	//	}
+	//	cout << "find the AVCodec " << param->codec_id << endl;
+
+	//	//申请AVCodecContext空间。需要传递一个编码器，也可以不传，但不会包含编码器。
+	//	codec = avcodec_alloc_context3(vcodec);
+	//	//该函数用于将流里面的参数，也就是AVStream里面的参数直接复制到AVCodecContext的上下文当中。
+	//	avcodec_parameters_to_context(codec, param);
+	//	avcodec_parameters_free(&param);
+	//	//八线程解码器
+	//	codec->thread_count = 8;
+
+	//	//打开解码器上下文
+	//	int re = avcodec_open2(codec, vcodec, 0);
+	//	if (re != 0)
+	//	{
+	//		avcodec_free_context(&codec);
+	//		char buf[1024] = { 0 };
+	//		av_strerror(re, buf, sizeof(buf) - 1);
+	//		cout << "avcodec_open2 failed! :" << buf << endl;
+	//		return;
+	//	}
+	//	cout << " avcodec_open2 success!" << endl;
+	//	//decodeStream();//解码
+	//}
+}
+
+void SDLVideoThread::initDecode()
+{
+	/* alloc AvFormatContext memory */
+	fctx = avformat_alloc_context();
+	if (!fctx)
+	{
+		cout << "fctx is nullptr" << endl;
+	}
+	if (avformat_open_input(&fctx, m_data->getMediaPath().toLocal8Bit(), NULL, NULL) != 0)
+	{
+		cout << "File open failed!" << endl;
+		return;
+	}
+	if (avformat_find_stream_info(fctx, NULL) < 0)
+	{
+		cout << "Stream find failed!\n";
+		return;
+	}
+	av_dump_format(fctx, -1, m_data->getMediaPath().toLocal8Bit(), NULL);
+
+	//找视频流
+	/*for (int i = 0; i < fctx->nb_streams; i++)
+	{
+		if (fctx->streams[i]->codecpar->codec_type == AVMEDIA_TYPE_VIDEO)
+			videoStream = i;
+	}*/
+	videoStream = av_find_best_stream(fctx, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
+	if (videoStream == -1)
+	{
+		cout << "Codec find failed!" << endl;
+		return;
+	}
+	cctx = avcodec_alloc_context3(NULL);
+	if (avcodec_parameters_to_context(cctx, fctx->streams[videoStream]->codecpar) < 0)
+	{
+		cout << "Copy stream failed!" << endl;
+		return;
+	}
+	c = avcodec_find_decoder(cctx->codec_id);
+	if (!c) {
+		cout << "Find Decoder failed!" << endl;
+		return;
+	}
+	if (avcodec_open2(cctx, c, NULL) != 0) {
+		cout << "Open codec failed!" << endl;
+		return;
+	}
+	cout << " avcodec_open2 success!" << endl;
+
+	imgCtx = sws_getContext(cctx->width, cctx->height, cctx->pix_fmt, cctx->width, cctx->height, AV_PIX_FMT_YUV420P,
+		SWS_BICUBIC, NULL, NULL, NULL);
+	if (!imgCtx) {
+		cout << "Get swscale context failed!" << endl;
+		return;
+	}
+	pkt = av_packet_alloc();
+	fr = av_frame_alloc();
+	yuv = av_frame_alloc();
+	vsize = av_image_get_buffer_size(AV_PIX_FMT_YUV420P, cctx->width, cctx->height, 1);
+	buf = (uint8_t *)av_malloc(vsize);
+	av_image_fill_arrays(yuv->data, yuv->linesize, buf, AV_PIX_FMT_YUV420P, cctx->width, cctx->height, 1);
+
+	m_data->setAVCodecContext(cctx);
 }
 
 void SDLVideoThread::setEnd(bool re)
@@ -171,6 +240,18 @@ void SDLVideoThread::setEnd(bool re)
 		if (m_data->getPlayWay() == CAMERA)
 		{
 			cap.release();
+		}
+		else if (m_data->getPlayWay() == MEDIA)
+		{
+			av_free(buf);
+			av_frame_free(&yuv);
+			av_frame_free(&fr);
+			av_packet_free(&pkt);
+			sws_freeContext(imgCtx);
+
+			avcodec_free_context(&cctx);
+			avformat_close_input(&fctx);
+			avformat_free_context(fctx);
 		}
 		
 	}
@@ -190,9 +271,33 @@ void SDLVideoThread::run()
 			}
 			curFrame.release();
 			cap >> curFrame;
-			m_data->addFrame(curFrame);
+			//m_data->addFrame(curFrame);
 			//cv::waitKey(30);
-			emit UpdateSDL();
+			//emit UpdateSDL();
+			//pVideo->updateSDLVideo();
+		}
+		if (m_data->getPlayWay() == MEDIA)
+		{
+			if (av_read_frame(fctx, pkt) < 0) {
+				cout << "read frame failed" << endl;
+				break;
+			}
+			//判断视频流
+			if (pkt->stream_index == videoStream) {
+				//多次读取帧
+				while (avcodec_receive_frame(cctx, fr))
+				{
+					if (avcodec_send_packet(cctx, pkt) != 0)
+					{
+						cout << "Send video stream packet failed!" << endl;
+						//av_strerror(iRes, errbuf, 256);
+						return;
+					}
+				}
+				sws_scale(imgCtx, fr->data, fr->linesize, 0, cctx->height, yuv->data, yuv->linesize);
+				m_data->addFrame(yuv);
+				emit UpdateSDL();
+			}
 		}
 
 		//QThread::sleep(10);

@@ -5,8 +5,6 @@
 #include <QTranslator>
 #include <QDebug>
 
-
-
 FILE* g_loggerfp = NULL;
 #define LOG_LEVEL   0
 // 自定义消息处理程序
