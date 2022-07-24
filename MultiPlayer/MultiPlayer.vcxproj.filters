@@ -32,35 +32,41 @@
     <ClCompile Include="code\MultiPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\SDLVideoThread.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="code\Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\SDLVideo.cpp">
+    <ClCompile Include="code\CameraDialog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\pVideo.h">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="code\VideoThread.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="code\DecodeThread.cpp">
+    <ClCompile Include="code\MyGLWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="code\CameraDialog.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="code\VideoThread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="code\MyGLWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
     <QtMoc Include="code\MultiPlayer.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="code\SDLVideoThread.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="code\SDLVideo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="code\MultiPlayer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="code\CameraDialog.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="code\MyGLWidget.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>
@@ -76,9 +82,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\Data.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="code\DecodeThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

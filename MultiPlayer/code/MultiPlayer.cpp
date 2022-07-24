@@ -1,30 +1,59 @@
 ﻿#include "MultiPlayer.h"
 #include <QDebug>
+#include <QHBoxLayout>
+#include <QMessageBox>
 
 //#pragma comment(lib, "..\\libjpeg-turbo.lib")
 
 MultiPlayer::MultiPlayer(QWidget *parent)
-    : QMainWindow(parent),
-	  ScreenButton(NULL),
-	sdlVideo(NULL)
+    : QMainWindow(parent)
 {
     ui.setupUi(this);
 	//ui.label_4->setStyleSheet("background-color: black");
+	
+	//initSDL();
+
+	this->setWindowTitle("Split_Screen");
+	//ui.widget->setStyleSheet("background-color : rgb(255,0,0);");
+	//show_1();
+
+	m_data = new Data();
+	cap = new cv::VideoCapture;
+	vidtd = new VideoThread(m_data, this);
+	glwdt = new MyGLWidget(this);
+	glwdt->setData(m_data);
+
 	initMenu();
 	initIcon();
 	initTool();
+	initLayout();
 	initConnect();
-	//initSDL();
-
-	sdlVideo = new SDLVideo((const void*)ui.openGLWidget->winId(), ui.openGLWidget->width(), ui.openGLWidget->height());
 }
 
 MultiPlayer::~MultiPlayer()
 {
-	if (sdlVideo != NULL)
+	closeCamera();
+
+
+	if (vidtd)
 	{
-		delete sdlVideo;
-		sdlVideo = NULL;
+		delete vidtd;
+		vidtd = nullptr;
+	}
+	if (m_data)
+	{
+		delete m_data;
+		m_data = nullptr;
+	}
+	if (cap)
+	{
+		delete cap;
+		cap = nullptr;
+	}
+	if (glwdt)
+	{
+		delete glwdt;
+		glwdt = nullptr;
 	}
 }
 
@@ -43,123 +72,106 @@ void MultiPlayer::initIcon()
 
 void MultiPlayer::initTool()
 {
-	ui.radioButton->setChecked(true);
-	ScreenButton = new QButtonGroup(this);
-	ScreenButton->addButton(ui.radioButton);
-	ScreenButton->addButton(ui.radioButton_two);
-	ScreenButton->addButton(ui.radioButton_four);
-	ScreenButton->addButton(ui.radioButton_nine);
+
+}
+
+void MultiPlayer::initLayout()
+{
+	//glwdt->resize(QSize(ui.widget->width(), ui.widget->height()));
+	QHBoxLayout *hLayout = new QHBoxLayout(this);
+	hLayout->addWidget(glwdt);
+	ui.widget->setLayout(hLayout);
 }
 
 void MultiPlayer::initConnect()
 {
-	//connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::showCamera);
-	connect(ui.buttonStopPlay, &QPushButton::clicked, this, &MultiPlayer::closeCamera);
-	connect(ui.action_file, &QAction::triggered, this, &MultiPlayer::openVideo);
+	connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::openCamera);
+	connect(vidtd, &VideoThread::updateGL, this, [=]() {
+		glwdt->update();
+	});
 }
 
-//void MultiPlayer::initSDL()
-//{
-//	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
-//		std::cout << "SDL_Init failed" << std::endl;
-//		return;
-//	}
-//	screen = SDL_CreateWindowFrom((void*)ui.openGLWidget->winId());
-//	if (!screen)
-//	{
-//		std::cout << "DL_CreateWindowFrom failed" << std::endl;
-//		return;
-//	}
-//	render = SDL_CreateRenderer(screen, -1, SDL_RENDERER_ACCELERATED);//渲染器使用硬件加速
-//	if (!render)
-//	{
-//		std::cout << "SDL_CreateRenderer failed" << std::endl;
-//		return;
-//	}
-//	tex = SDL_CreateTexture(
-//		render, SDL_PIXELFORMAT_BGRA32, SDL_TEXTUREACCESS_STREAMING, ui.openGLWidget->width(),
-//		ui.openGLWidget->height());
-//	if (!tex) {
-//		SDL_LogError(1, "SDL: SDL_CreateTexture failed.");
-//		return;
-//	}
-//}
 
 void MultiPlayer::cancelAllCheckRadioButton()
 {
-	for (auto item : ScreenButton->buttons()) {
-		item->setChecked(false);
-	}
+
 }
 
-//void MultiPlayer::loadSDLImage(const cv::Mat &img)
-//{
-//	static int i = 0;
-//	std::cout << "frame :: " << i++ << std::endl;
-//	SDL_RenderClear(render);//初始化后备缓冲区
-//	
-//	/* Mat转存buf容器 */
-//	int img_size = img.cols * img.rows;
-//	unsigned char* buf = new unsigned char[img_size];
-//	int n = 0;
-//	std::cout << "pix :: " << img.at<uchar>(11, 11) << std::endl;
-//	for (size_t i = 0; i < img.rows; i++)
-//	{
-//		for (size_t j = 0; j < img.cols; j++) {
-//			buf[n] = img.at<uchar>(i, j);
-//			n++;
-//		}
-//	}
-//	cv::Mat dest = img;
-//	cv::imwrite("test.bmp", dest);
-//	//SDL_Rect rect = SDL_Rect{ 0,0,ui.openGLWidget->width(),ui.openGLWidget->height() };   // 尺寸需要与texture相同
-//	//SDL_UpdateTexture(tex, &rect, (const void*)buf, img.cols);
-//	//SDL_RenderCopy(render, tex, NULL, &rect);
-//	//SDL_RenderPresent(render);
-//	SDL_Surface *pic = SDL_LoadBMP("test.bmp");
-//	//载入的图片生成SDL材质
-//	SDL_Texture * texture = SDL_CreateTextureFromSurface(render, pic);
-//
-//	//把材质复制到渲染器
-//	SDL_RenderCopy(render, texture, NULL, NULL);
-//	//显示出来
-//	SDL_RenderPresent(render);
-//
-//	// 清理资源
-//	SDL_DestroyTexture(texture);
-//	SDL_FreeSurface(pic);
-//	//销毁纹理
-//	//SDL_DestroyTexture(tex);
-//	delete[] buf;
-//	buf = nullptr;
-//	SDL_Delay(40);
-//}
 
 void MultiPlayer::closeCamera()
 {
-	//isPlayEnd = true;
-	//isCameraOpen = false;
-	//capture.release();
-	sdlVideo->endPlay();
+	vidtd->setStart(false);
+	vidtd->setPlayWay(NONE);
+
+	vidtd->requestInterruption();
+	vidtd->wait();
+
+	cap->release();
 }
 
-void MultiPlayer::openVideo()
+void MultiPlayer::closeEvent(QCloseEvent * event)
 {
-	std::cout << "***************************** " << std::endl;;
-	QString fileName = QFileDialog::getOpenFileName(this, tr("open local media"), ".", "*.avi *.mp4 *.wmv;;*.*");
-	std::cout << "file "<< fileName.toLocal8Bit().data() << std::endl;
-	if (fileName.isEmpty())
+	//QMessageBox::StandardButton button;
+	//button = QMessageBox::question(this, tr("退出程序"), QString(tr("确认退出程序")), QMessageBox::Yes | QMessageBox::No);
+	//if (button == QMessageBox::No)
+	//{
+	//	event->ignore(); // 忽略退出信号，程序继续进行  
+	//}
+	//else if (button == QMessageBox::Yes)
+	//{
+	//	event->accept(); // 接受退出信号，程序退出  
+	//}
+}
+
+void MultiPlayer::openCamera()
+{
+	/*QList<QCameraInfo> cameras = QCameraInfo::availableCameras();
+
+	foreach(auto cameraInfo, cameras) {
+		QString str = cameraInfo.description();
+		QString str2 = cameraInfo.deviceName();
+
+		std::cout << "description :: " << str.toStdString() << std::endl;
+		std::cout << "name :: " << str2.toStdString() << std::endl;
+	}*/
+
+	//CameraDialog camDlg;
+	//camDlg.exec();
+	if (!camDlg)
 	{
-		return;
-	}
-	sdlVideo->openVideo(fileName);
-}
+		camDlg = new CameraDialog(this);
 
-void MultiPlayer::showCamera()
-{
-	ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
-	sdlVideo->setPlayWay(CAMERA);
-	sdlVideo->startPlay();
+		if (!vidtd->isRunning())
+		{
+			vidtd->start();
+		}
+		connect(camDlg, &CameraDialog::acceptSig, this, [=](int camIndex, QString camName) {
+			camDlg->hide();
+			//打开摄像头
+			cap->open(camIndex);
+			cap->set(cv::CAP_PROP_FRAME_WIDTH, 1920);
+			cap->set(cv::CAP_PROP_FRAME_HEIGHT, 1080);
+			cap->set(cv::CAP_PROP_FOURCC, cv::VideoWriter::fourcc('M', 'J', 'P', 'G'));
+			// cap->set(cv::CAP_PROP_FPS, 30);//帧数
+			//cap->set(cv::CAP_PROP_BRIGHTNESS, 1);//亮度 50
+			//cap->set(cv::CAP_PROP_CONTRAST, 40);//对比度 50
+			//cap->set(cv::CAP_PROP_SATURATION, 50);//饱和度 50
+			//cap->set(cv::CAP_PROP_HUE, 50);//色调 0
+			//cap->set(cv::CAP_PROP_EXPOSURE, 50);//曝光 -12	
+
+			vidtd->setVideoCapture(cap);
+			vidtd->setStart(true);
+			vidtd->setPlayWay(CAMERA);
+			vidtd->start();
+
+			
+		});
+	}
+	camDlg->show();
+
+	//ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
+	//sdlVideo->setPlayWay(CAMERA);
+	//sdlVideo->startPlay();
 	//if (isCameraOpen == true)
 	//{
 	//	return;

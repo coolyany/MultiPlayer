@@ -1,5 +1,9 @@
 ﻿#include "Data.h"
 
+Data::Data()
+{
+}
+
 Data::Data(int width, int height)
 	:m_width(width),
 	 m_height(height)
@@ -22,6 +26,24 @@ void Data::addFrame(AVFrame* frame)
 AVFrame* Data::popFrame()
 {
 	return vidFrame.dequeue();
+}
+
+void Data::addCamFrame(QImage img)
+{
+	camFrames.enqueue(img);
+}
+
+QImage Data::popCamFrame()
+{
+	return camFrames.dequeue();
+}
+
+bool Data::isCamFrameNull()
+{
+	if (camFrames.length() == 0)
+		return false;
+	else
+		return true;
 }
 
 void Data::setMediaPath(const QString & path)

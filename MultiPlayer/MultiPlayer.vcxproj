@@ -32,7 +32,7 @@
   </ImportGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="QtSettings">
     <QtInstall>5.14.2_msvc2017_64</QtInstall>
-    <QtModules>core;gui;qml;widgets</QtModules>
+    <QtModules>core;gui;multimedia;widgets;multimediawidgets</QtModules>
     <QtBuildConfig>debug</QtBuildConfig>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'" Label="QtSettings">
@@ -55,8 +55,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <IncludePath>D:\TEST\MultiPlayer\3rd\opencv420\include;D:\TEST\MultiPlayer\3rd\SDL2-2.0.20\include;D:\TEST\MultiPlayer\3rd\ffmpeg-4.1.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\TEST\MultiPlayer\3rd\opencv420\x64\vc15\lib;D:\TEST\MultiPlayer\3rd\SDL2-2.0.20\lib\x64;D:\TEST\MultiPlayer\3rd\ffmpeg-4.1.3\x64\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
@@ -71,9 +71,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
       <AdditionalDependencies>opencv_world420d.lib;SDL2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)3rd\opencv420\x64\vc15\lib;$(SolutionDir)3rd\SDL2-2.0.20\lib;$(SolutionDir)3rd\ffmpeg-4.1.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rd\opencv420\include;$(SolutionDir)3rd\SDL2-2.0.20\include;$(SolutionDir)3rd\ffmpeg-4.1.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -103,25 +105,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="code\CameraDialog.cpp" />
     <ClCompile Include="code\Data.cpp" />
-    <ClCompile Include="code\DecodeThread.cpp" />
-    <ClCompile Include="code\pVideo.h" />
-    <ClCompile Include="code\SDLVideoThread.cpp" />
-    <ClCompile Include="code\SDLVideo.cpp" />
+    <ClCompile Include="code\MyGLWidget.cpp" />
+    <ClCompile Include="code\VideoThread.cpp" />
     <QtRcc Include="MultiPlayer.qrc" />
+    <QtUic Include="code\CameraDialog.ui" />
     <QtUic Include="code\MultiPlayer.ui" />
-    <QtMoc Include="code\MultiPlayer.h" />
     <ClCompile Include="code\MultiPlayer.cpp" />
     <ClCompile Include="code\main.cpp" />
+    <QtUic Include="code\MyGLWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="qss\MaterialDark.qss" />
   </ItemGroup>
   <ItemGroup>
+    <QtMoc Include="code\MultiPlayer.h" />
+    <QtMoc Include="code\MyGLWidget.h" />
+    <QtMoc Include="code\VideoThread.h" />
+    <QtMoc Include="code\CameraDialog.h" />
     <ClInclude Include="code\Data.h" />
-    <ClInclude Include="code\DecodeThread.h" />
-    <QtMoc Include="code\SDLVideo.h" />
-    <QtMoc Include="code\SDLVideoThread.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
