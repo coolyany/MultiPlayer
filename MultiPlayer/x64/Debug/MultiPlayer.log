@@ -1,2 +1,7 @@
-﻿  MyGLWidget.cpp
+﻿  moc code\MyGLWidget.h
+  MultiPlayer.cpp
+  MyGLWidget.cpp
+  main.cpp
+  moc_MultiPlayer.cpp
+  moc_MyGLWidget.cpp
   MultiPlayer.vcxproj -> D:\Code\MultiPlayer\x64\Debug\MultiPlayer.exe

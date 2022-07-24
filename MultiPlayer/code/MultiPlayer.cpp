@@ -87,7 +87,7 @@ void MultiPlayer::initConnect()
 {
 	connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::openCamera);
 	connect(vidtd, &VideoThread::updateGL, this, [=]() {
-		glwdt->update();
+		glwdt->UpdateFrame();
 	});
 }
 
