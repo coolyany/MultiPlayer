@@ -926,3 +926,54 @@ To do so, destroy() the texture and then create() and setMipLevels() [opengl\qop
 To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
 [2022-07-24 13:00:26.736] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
 To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:12.485] [Warning]:QLayout: Attempting to add QLayout "" to MultiPlayer "MultiPlayerClass", which already has a layout [kernel\qlayout.cpp:148-__cdecl QLayout::QLayout(class QLayoutPrivate &,class QLayout *,class QWidget *)]
+[2022-07-24 22:06:32.508] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:32.509] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:32.509] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:32.514] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:32.514] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:32.514] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:42.924] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:42.924] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:42.924] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:42.924] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:42.924] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:42.924] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:45.958] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:45.958] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:45.958] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:06:45.964] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:06:45.964] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:06:45.964] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:07:00.770] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:07:00.770] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:07:00.770] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:07:01.025] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:07:01.025] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:07:01.025] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:07:01.025] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:07:01.025] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:07:01.025] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
+[2022-07-24 22:07:07.208] [Warning]:QOpenGLTexture::setFormat(): Cannot change format once storage has been allocated [opengl\qopengltexture.cpp:2721-void __cdecl QOpenGLTexture::setFormat(enum QOpenGLTexture::TextureFormat)]
+[2022-07-24 22:07:07.208] [Warning]:Cannot resize a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setSize() [opengl\qopengltexture.cpp:2944-void __cdecl QOpenGLTexture::setSize(int,int,int)]
+[2022-07-24 22:07:07.208] [Warning]:Cannot set mip levels on a texture that already has storage allocated.
+To do so, destroy() the texture and then create() and setMipLevels() [opengl\qopengltexture.cpp:3036-void __cdecl QOpenGLTexture::setMipLevels(int)]
