@@ -31,7 +31,9 @@
 *.out
 *.app
 
-#忽略目录
+#.vs
 /.vs/
-/x64/Debug#忽略根目录下的x64目录
+
+#忽略根目录下的x64目录
+/x64/Debug/
 /MultiPlayer/x64/
