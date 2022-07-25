@@ -1,7 +1,20 @@
-﻿  moc code\MyGLWidget.h
-  MultiPlayer.cpp
+﻿  uic code\CameraDialog.ui
+  uic code\MultiPlayer.ui
+  uic code\MyGLWidget.ui
+  rcc MultiPlayer.qrc
+  moc code\MultiPlayer.h
+  moc code\MyGLWidget.h
+  moc code\VideoThread.h
+  moc code\CameraDialog.h
+  CameraDialog.cpp
+  Data.cpp
   MyGLWidget.cpp
+  VideoThread.cpp
+  MultiPlayer.cpp
   main.cpp
+  qrc_MultiPlayer.cpp
   moc_MultiPlayer.cpp
   moc_MyGLWidget.cpp
+  moc_VideoThread.cpp
+  moc_CameraDialog.cpp
   MultiPlayer.vcxproj -> D:\Code\MultiPlayer\x64\Debug\MultiPlayer.exe
