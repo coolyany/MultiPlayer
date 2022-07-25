@@ -37,3 +37,5 @@
 #忽略根目录下的x64目录
 /x64/
 /MultiPlayer/x64/
+
+/aaaa/
