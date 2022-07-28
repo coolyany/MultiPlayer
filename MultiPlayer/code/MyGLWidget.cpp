@@ -19,6 +19,8 @@
 #include <QTextEdit>
 #include <QList>
 #include <QMessageBox>
+#include <QLabel>
+#include <QPixmap>
 
 MyGLWidget::MyGLWidget(QWidget *parent)
 	: QOpenGLWidget(parent),
@@ -41,8 +43,24 @@ void MyGLWidget::UpdateFrame()
 {
 	if (!m_data)
 		return;
-	QImage img = m_data->popCamFrame();
-	setImage(img);
+	if (m_data->getPlayWay() == CAMERA)
+	{
+		QImage img = m_data->popCamFrame();
+		setImage(img);
+	}
+	else if (m_data->getPlayWay() == MEDIA)
+	{
+		QImage* img = m_data->popMediaFrame();
+		if (!img)
+			return;
+		setImage(*img);
+		delete img;
+		img = nullptr;
+		//QImage *img2 = new QImage("D:\\Code\\MultiPlayer\\a.jpg");
+		
+		
+	}
+	
 }
 //
 //void MyGLWidget::paintEvent(QPaintEvent * e)

@@ -42,6 +42,7 @@ public:
 public slots:
 	void openCamera();
 	void closeCamera();
+	void openMedia();//打开媒体
 protected:
 	void closeEvent(QCloseEvent *event) override;
 private:

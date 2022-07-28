@@ -46,6 +46,22 @@ bool Data::isCamFrameNull()
 		return true;
 }
 
+void Data::addMediaFrame(QImage * frame)
+{
+
+	mediaFrames.enqueue(frame);
+	std::cout << "add lenght :: " << mediaFrames.length() << std::endl;
+
+}
+
+QImage *Data::popMediaFrame()
+{
+	std::cout << "pop lenght :: " << mediaFrames.length() << std::endl;
+	if (mediaFrames.length() == 0)
+		return NULL;
+	return mediaFrames.dequeue();
+}
+
 void Data::setMediaPath(const QString & path)
 {
 	mediaPath = path;

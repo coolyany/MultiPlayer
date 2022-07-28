@@ -31,15 +31,18 @@ public:
 	inline PLAYWAY getPlayWay() { return m_playway; }
 	inline void setPlayWay(PLAYWAY way) { m_playway = way; }
 
-	void addFrame(AVFrame* frame);//缓存视频帧
-	AVFrame* popFrame();//读取视频帧
+	void addFrame(AVFrame* frame);//缓存媒体视频帧
+	AVFrame* popFrame();//读取媒体视频帧
 
 	void addCamFrame(QImage img);//缓存摄像头帧
 	QImage popCamFrame();//读取摄像头画面
 	bool isCamFrameNull();
 
+	void addMediaFrame(QImage* frame);
+	QImage* popMediaFrame();
+
 	void setMediaPath(const QString &path);
-	inline QString &getMediaPath() { return mediaPath; }
+	//inline QString &getMediaPath() { return mediaPath; }
 
 	int m_width, m_height;
 
@@ -52,6 +55,8 @@ private:
 
 	QQueue<AVFrame*>vidFrame;
 	QQueue<QImage>camFrames;
+	QQueue<QImage *>mediaFrames;
+
 	QString mediaPath;
 	
 };

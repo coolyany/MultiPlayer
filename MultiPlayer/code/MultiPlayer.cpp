@@ -2,7 +2,7 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QMessageBox>
-
+#include <QLabel>
 //#pragma comment(lib, "..\\libjpeg-turbo.lib")
 
 MultiPlayer::MultiPlayer(QWidget *parent)
@@ -33,8 +33,6 @@ MultiPlayer::MultiPlayer(QWidget *parent)
 MultiPlayer::~MultiPlayer()
 {
 	closeCamera();
-
-
 	if (vidtd)
 	{
 		delete vidtd;
@@ -88,7 +86,9 @@ void MultiPlayer::initConnect()
 	connect(ui.action_camera, &QAction::triggered, this, &MultiPlayer::openCamera);
 	connect(vidtd, &VideoThread::updateGL, this, [=]() {
 		glwdt->UpdateFrame();
+		
 	});
+	connect(ui.action_file, &QAction::triggered, this, &MultiPlayer::openMedia);
 }
 
 
@@ -107,6 +107,21 @@ void MultiPlayer::closeCamera()
 	vidtd->wait();
 
 	cap->release();
+}
+
+void MultiPlayer::openMedia()
+{
+	QString fileName = QFileDialog::getOpenFileName(this, tr("open local media"), ".", "*.avi *.mp4 *.wmv *.flv;;*.*");
+	std::cout << "file " << fileName.toLocal8Bit().data() << std::endl;
+
+	if (fileName.isEmpty())
+	{
+		return;
+	}
+	m_data->setPlayWay(MEDIA);
+	vidtd->setStart(true);
+	vidtd->openMedia(fileName);
+	
 }
 
 void MultiPlayer::closeEvent(QCloseEvent * event)
@@ -161,7 +176,9 @@ void MultiPlayer::openCamera()
 
 			vidtd->setVideoCapture(cap);
 			vidtd->setStart(true);
-			vidtd->setPlayWay(CAMERA);
+			//vidtd->setPlayWay(CAMERA);
+			m_data->setPlayWay(CAMERA);
+
 			vidtd->start();
 
 			
