@@ -6,5 +6,10 @@
         <file>resource/play-back.png</file>
         <file>resource/play-skip.png</file>
         <file>resource/stop.png</file>
+        <file>resource/close.png</file>
+        <file>resource/max.png</file>
+        <file>resource/min.png</file>
+        <file>resource/restore.png</file>
+        <file>resource/loading.jpg</file>
     </qresource>
 </RCC>

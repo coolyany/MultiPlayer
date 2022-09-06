@@ -1,62 +1,32 @@
-ï»¿#pragma once
+#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MultiPlayer.h"
-#include <QButtonGroup>
+
+#include "MyData.h"
+#include "PlayCtrl.h"
+
 #include <QFileDialog>
-#include <QCameraInfo>
-#include <QList>
-#include <QLayout>
-#include <QListWidget>
-#include <QCloseEvent>  
 
-#include "CameraDialog.h"
-#include "VideoThread.h"
-#include "MyGLWidget.h"
-
-#define ERROR 0
-
-//#include "Data.h"
-//extern "C" {
-//	#include <SDL.h>
-//	#undef main
-//}
-
-class MultiPlayer : public QMainWindow
-{
-    Q_OBJECT
-
+class MultiPlayer : public QMainWindow {
 public:
-    MultiPlayer(QWidget *parent = Q_NULLPTR);
-	~MultiPlayer();
+	MultiPlayer(QWidget *parent = Q_NULLPTR);
 
-	void initMenu();
-	void initIcon();
-	void initTool();
-	void initLayout();
-	void initConnect();
-	//void initSDL();
-
-	void cancelAllCheckRadioButton();//å–æ¶ˆé€‰ä¸­æ‰€æœ‰radiobutton
-	//void loadSDLImage(const cv::Mat &img);//SDLåŠ è½½å›¾ç‰‡
-public slots:
-	void openCamera();
-	void closeCamera();
-	void openMedia();//æ‰“å¼€åª’ä½“
-protected:
-	void closeEvent(QCloseEvent *event) override;
+//³õÊ¼»¯º¯Êı
+public:
+	void init();//initialize the set
+	void SignConnect();//initialize the connect
+//²Ûº¯Êı
+public:
+	void onClickActMedia(QAction *act);
+//·½·¨º¯Êı
+public:
+	void playLocalMedia();
 private:
-    Ui::MultiPlayerClass ui;
-	bool isStop = false;
-	QButtonGroup *ScreenButton = nullptr;
-	//SDL_Texture *tex = noullptr;
-	//SDL_Window *screen = nullptr;
-	//SDL_Renderer *render = nullptr;
-	//SDL_Texture *bitmapTex = nullptr;
-
-	Data* m_data = nullptr;
-	CameraDialog* camDlg = nullptr;
-	VideoThread* vidtd = nullptr;
-	cv::VideoCapture *cap = nullptr;
-	MyGLWidget* glwdt = nullptr;
+	MyData *m_data = nullptr;
+	MyData::MyMediaWay m_pw;
+	QString m_currentPath;
+	PlayCtrl *m_pc = nullptr;
+private:
+	Ui::MultiPlayer ui;
 };

@@ -12,128 +12,134 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
+#include "MyGraphicsView.h"
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MultiPlayerClass
+class Ui_MultiPlayer
 {
 public:
-    QAction *action_file;
-    QAction *action_stream;
-    QAction *action_camera;
-    QAction *action_T;
-    QAction *action_T_4;
-    QAction *action_T_9;
-    QAction *action_A;
-    QAction *action_T_2;
-    QWidget *centralWidget;
+    QAction *action_local;
+    QWidget *centralwidget;
+    QGridLayout *gridLayout;
+    MyGraphicsView *graphicsView;
     QHBoxLayout *horizontalLayout;
-    QWidget *widget;
-    QMenuBar *menuBar;
+    QLabel *label_pre;
+    QSlider *horizontalSlider;
+    QLabel *label_last;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
+    QSpacerItem *horizontalSpacer;
+    QMenuBar *menubar;
     QMenu *menu_media;
-    QMenu *menu_view;
-    QMenu *menu_help;
-    QToolBar *mainToolBar;
-    QStatusBar *statusBar;
+    QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *MultiPlayerClass)
+    void setupUi(QMainWindow *MultiPlayer)
     {
-        if (MultiPlayerClass->objectName().isEmpty())
-            MultiPlayerClass->setObjectName(QString::fromUtf8("MultiPlayerClass"));
-        MultiPlayerClass->resize(714, 496);
-        action_file = new QAction(MultiPlayerClass);
-        action_file->setObjectName(QString::fromUtf8("action_file"));
-        action_stream = new QAction(MultiPlayerClass);
-        action_stream->setObjectName(QString::fromUtf8("action_stream"));
-        action_camera = new QAction(MultiPlayerClass);
-        action_camera->setObjectName(QString::fromUtf8("action_camera"));
-        action_T = new QAction(MultiPlayerClass);
-        action_T->setObjectName(QString::fromUtf8("action_T"));
-        action_T_4 = new QAction(MultiPlayerClass);
-        action_T_4->setObjectName(QString::fromUtf8("action_T_4"));
-        action_T_9 = new QAction(MultiPlayerClass);
-        action_T_9->setObjectName(QString::fromUtf8("action_T_9"));
-        action_A = new QAction(MultiPlayerClass);
-        action_A->setObjectName(QString::fromUtf8("action_A"));
-        action_T_2 = new QAction(MultiPlayerClass);
-        action_T_2->setObjectName(QString::fromUtf8("action_T_2"));
-        centralWidget = new QWidget(MultiPlayerClass);
-        centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        horizontalLayout = new QHBoxLayout(centralWidget);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
+        if (MultiPlayer->objectName().isEmpty())
+            MultiPlayer->setObjectName(QString::fromUtf8("MultiPlayer"));
+        MultiPlayer->resize(627, 409);
+        action_local = new QAction(MultiPlayer);
+        action_local->setObjectName(QString::fromUtf8("action_local"));
+        centralwidget = new QWidget(MultiPlayer);
+        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
+        gridLayout = new QGridLayout(centralwidget);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        graphicsView = new MyGraphicsView(centralwidget);
+        graphicsView->setObjectName(QString::fromUtf8("graphicsView"));
+        graphicsView->setStyleSheet(QString::fromUtf8("background-color: rgb(0, 0, 0);"));
+
+        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(10);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        widget = new QWidget(centralWidget);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setStyleSheet(QString::fromUtf8(""));
+        horizontalLayout->setContentsMargins(10, 0, 10, 5);
+        label_pre = new QLabel(centralwidget);
+        label_pre->setObjectName(QString::fromUtf8("label_pre"));
 
-        horizontalLayout->addWidget(widget);
+        horizontalLayout->addWidget(label_pre);
 
-        MultiPlayerClass->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MultiPlayerClass);
-        menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 714, 22));
-        menu_media = new QMenu(menuBar);
+        horizontalSlider = new QSlider(centralwidget);
+        horizontalSlider->setObjectName(QString::fromUtf8("horizontalSlider"));
+        horizontalSlider->setOrientation(Qt::Horizontal);
+
+        horizontalLayout->addWidget(horizontalSlider);
+
+        label_last = new QLabel(centralwidget);
+        label_last->setObjectName(QString::fromUtf8("label_last"));
+
+        horizontalLayout->addWidget(label_last);
+
+
+        gridLayout->addLayout(horizontalLayout, 1, 0, 1, 1);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+        horizontalLayout_2->setContentsMargins(-1, 5, -1, -1);
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+
+        horizontalLayout_2->addWidget(pushButton);
+
+        pushButton_2 = new QPushButton(centralwidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+
+        horizontalLayout_2->addWidget(pushButton_2);
+
+        horizontalSpacer = new QSpacerItem(444, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+
+        gridLayout->addLayout(horizontalLayout_2, 2, 0, 1, 1);
+
+        MultiPlayer->setCentralWidget(centralwidget);
+        menubar = new QMenuBar(MultiPlayer);
+        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setGeometry(QRect(0, 0, 627, 22));
+        menu_media = new QMenu(menubar);
         menu_media->setObjectName(QString::fromUtf8("menu_media"));
-        menu_view = new QMenu(menuBar);
-        menu_view->setObjectName(QString::fromUtf8("menu_view"));
-        menu_help = new QMenu(menuBar);
-        menu_help->setObjectName(QString::fromUtf8("menu_help"));
-        MultiPlayerClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(MultiPlayerClass);
-        mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
-        MultiPlayerClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
-        statusBar = new QStatusBar(MultiPlayerClass);
-        statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        MultiPlayerClass->setStatusBar(statusBar);
+        MultiPlayer->setMenuBar(menubar);
+        statusbar = new QStatusBar(MultiPlayer);
+        statusbar->setObjectName(QString::fromUtf8("statusbar"));
+        MultiPlayer->setStatusBar(statusbar);
 
-        menuBar->addAction(menu_media->menuAction());
-        menuBar->addAction(menu_view->menuAction());
-        menuBar->addAction(menu_help->menuAction());
-        menu_media->addAction(action_file);
-        menu_media->addAction(action_stream);
-        menu_media->addAction(action_camera);
-        menu_view->addAction(action_T);
-        menu_view->addAction(action_T_2);
-        menu_view->addAction(action_T_4);
-        menu_view->addAction(action_T_9);
-        menu_help->addAction(action_A);
-        mainToolBar->addAction(action_file);
-        mainToolBar->addAction(action_stream);
-        mainToolBar->addAction(action_camera);
+        menubar->addAction(menu_media->menuAction());
+        menu_media->addAction(action_local);
 
-        retranslateUi(MultiPlayerClass);
+        retranslateUi(MultiPlayer);
 
-        QMetaObject::connectSlotsByName(MultiPlayerClass);
+        QMetaObject::connectSlotsByName(MultiPlayer);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MultiPlayerClass)
+    void retranslateUi(QMainWindow *MultiPlayer)
     {
-        MultiPlayerClass->setWindowTitle(QCoreApplication::translate("MultiPlayerClass", "MultiPlayer", nullptr));
-        action_file->setText(QCoreApplication::translate("MultiPlayerClass", "\346\211\223\345\274\200\346\226\207\344\273\266(&N)", nullptr));
-        action_stream->setText(QCoreApplication::translate("MultiPlayerClass", "\346\211\223\345\274\200\344\270\262\346\265\201(&O)", nullptr));
-        action_camera->setText(QCoreApplication::translate("MultiPlayerClass", "\346\211\223\345\274\200\346\221\204\345\203\217\345\244\264(&S)", nullptr));
-        action_T->setText(QCoreApplication::translate("MultiPlayerClass", "\345\205\250\351\235\242\350\247\206\345\233\276(&T)", nullptr));
-        action_T_4->setText(QCoreApplication::translate("MultiPlayerClass", "\345\233\233\345\210\206\345\261\217\350\247\206\345\233\276(&T)", nullptr));
-        action_T_9->setText(QCoreApplication::translate("MultiPlayerClass", "\344\271\235\345\210\206\345\261\217\350\247\206\345\233\276(&T)", nullptr));
-        action_A->setText(QCoreApplication::translate("MultiPlayerClass", "\345\205\263\344\272\216(&A)", nullptr));
-        action_T_2->setText(QCoreApplication::translate("MultiPlayerClass", "\344\272\214\345\210\206\345\261\217\350\247\206\345\233\276", nullptr));
-        menu_media->setTitle(QCoreApplication::translate("MultiPlayerClass", "\345\252\222\344\275\223(&M)", nullptr));
-        menu_view->setTitle(QCoreApplication::translate("MultiPlayerClass", "\350\247\206\345\233\276(&V)", nullptr));
-        menu_help->setTitle(QCoreApplication::translate("MultiPlayerClass", "\345\270\256\345\212\251(&H)", nullptr));
+        MultiPlayer->setWindowTitle(QCoreApplication::translate("MultiPlayer", "MainWindow", nullptr));
+        action_local->setText(QCoreApplication::translate("MultiPlayer", "\346\234\254\345\234\260\345\252\222\344\275\223", nullptr));
+        label_pre->setText(QCoreApplication::translate("MultiPlayer", "00:00", nullptr));
+        label_last->setText(QCoreApplication::translate("MultiPlayer", "00:00", nullptr));
+        pushButton->setText(QCoreApplication::translate("MultiPlayer", "\346\222\255\346\224\276", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MultiPlayer", "\345\201\234\346\255\242", nullptr));
+        menu_media->setTitle(QCoreApplication::translate("MultiPlayer", "\345\252\222\344\275\223", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MultiPlayerClass: public Ui_MultiPlayerClass {};
+    class MultiPlayer: public Ui_MultiPlayer {};
 } // namespace Ui
 
 QT_END_NAMESPACE

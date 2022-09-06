@@ -70,12 +70,12 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Link>
-      <AdditionalDependencies>opencv_world420d.lib;SDL2.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rd\opencv420\x64\vc15\lib;$(SolutionDir)3rd\SDL2-2.0.20\lib;$(SolutionDir)3rd\ffmpeg-4.1.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world420d.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;postproc.lib;swresample.lib;swscale.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Code\MultiPlayer_graphics\3rd\ffmpeg-4.1.3\x64\lib;D:\Code\MultiPlayer_graphics\3rd\opencv420\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <ClCompile>
       <PreprocessorDefinitions>$(Qt_DEFINES_);%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rd\opencv420\include;$(SolutionDir)3rd\SDL2-2.0.20\include;$(SolutionDir)3rd\ffmpeg-4.1.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rd\opencv420\include;$(SolutionDir)3rd\ffmpeg-4.1.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">
@@ -105,26 +105,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="code\CameraDialog.cpp" />
-    <ClCompile Include="code\Data.cpp" />
-    <ClCompile Include="code\MyGLWidget.cpp" />
-    <ClCompile Include="code\VideoThread.cpp" />
     <QtRcc Include="MultiPlayer.qrc" />
-    <QtUic Include="code\CameraDialog.ui" />
-    <QtUic Include="code\MultiPlayer.ui" />
-    <ClCompile Include="code\MultiPlayer.cpp" />
-    <ClCompile Include="code\main.cpp" />
-    <QtUic Include="code\MyGLWidget.ui" />
   </ItemGroup>
   <ItemGroup>
     <None Include="qss\MaterialDark.qss" />
   </ItemGroup>
   <ItemGroup>
-    <QtMoc Include="code\MultiPlayer.h" />
-    <QtMoc Include="code\MyGLWidget.h" />
-    <QtMoc Include="code\VideoThread.h" />
-    <QtMoc Include="code\CameraDialog.h" />
-    <ClInclude Include="code\Data.h" />
+    <ClCompile Include="code\IVideoCall.cpp" />
+    <ClCompile Include="code\LoadDialog.cpp" />
+    <ClCompile Include="code\main.cpp" />
+    <ClCompile Include="code\MyData.cpp" />
+    <ClCompile Include="code\MyGraphicsView.cpp" />
+    <ClCompile Include="code\MyMainWidget.cpp" />
+    <ClCompile Include="code\MultiPlayer.cpp" />
+    <ClCompile Include="code\PlayCtrl.cpp" />
+    <ClCompile Include="code\titleBar.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtUic Include="code\LoadDialog.ui" />
+    <QtUic Include="code\MultiPlayer.ui" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="code\LoadDialog.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="code\MyMainWidget.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\IVideoCall.h" />
+    <ClInclude Include="code\MultiPlayer.h" />
+    <QtMoc Include="code\titleBar.h" />
+    <ClInclude Include="code\MyData.h" />
+    <QtMoc Include="code\PlayCtrl.h" />
+    <QtMoc Include="code\MyGraphicsView.h" />
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MultiPlayer.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
