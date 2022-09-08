@@ -20,6 +20,11 @@ bool PlayCtrl::OpenMedia(const QString & path, MyData::MyMediaWay way, IVideoCal
 	//打开本地视频
 	if (way == MyData::LocalPlay)
 	{
+		if (!m_mt->Open(path.toLocal8Bit(), call, way))
+		{
+			return false;
+		}
+		
 
 	}
 }

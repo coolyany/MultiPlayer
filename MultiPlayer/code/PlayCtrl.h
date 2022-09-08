@@ -3,6 +3,7 @@
 
 #include "IVideoCall.h"
 #include "MyData.h"
+#include "XMediaThread.h"
 //class MyData;
 
 class PlayCtrl :public QObject
@@ -20,4 +21,5 @@ private:
 	MyData *m_data = nullptr;
 	MyData::MyMediaWay m_curType;
 	IVideoCall *m_call = nullptr;
+	XMediaThread *m_mt = nullptr;
 };

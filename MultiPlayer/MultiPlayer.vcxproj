@@ -115,11 +115,18 @@
     <ClCompile Include="code\LoadDialog.cpp" />
     <ClCompile Include="code\main.cpp" />
     <ClCompile Include="code\MyData.cpp" />
+    <ClCompile Include="code\MyGraphicsScene.cpp" />
     <ClCompile Include="code\MyGraphicsView.cpp" />
     <ClCompile Include="code\MyMainWidget.cpp" />
     <ClCompile Include="code\MultiPlayer.cpp" />
+    <ClCompile Include="code\PixItem.cpp" />
     <ClCompile Include="code\PlayCtrl.cpp" />
     <ClCompile Include="code\titleBar.cpp" />
+    <ClCompile Include="code\XDecode.cpp" />
+    <ClCompile Include="code\XDecodeThread.cpp" />
+    <ClCompile Include="code\XMedia.cpp" />
+    <ClCompile Include="code\XMediaThread.cpp" />
+    <ClCompile Include="code\XVideoThread.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="code\LoadDialog.ui" />
@@ -138,6 +145,13 @@
     <ClInclude Include="code\MyData.h" />
     <QtMoc Include="code\PlayCtrl.h" />
     <QtMoc Include="code\MyGraphicsView.h" />
+    <QtMoc Include="code\XMediaThread.h" />
+    <QtMoc Include="code\MyGraphicsScene.h" />
+    <QtMoc Include="code\PixItem.h" />
+    <ClInclude Include="code\XDecode.h" />
+    <ClInclude Include="code\XDecodeThread.h" />
+    <ClInclude Include="code\XMedia.h" />
+    <ClInclude Include="code\XVideoThread.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>

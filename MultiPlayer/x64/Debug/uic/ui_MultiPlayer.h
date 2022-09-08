@@ -50,7 +50,7 @@ public:
     {
         if (MultiPlayer->objectName().isEmpty())
             MultiPlayer->setObjectName(QString::fromUtf8("MultiPlayer"));
-        MultiPlayer->resize(627, 409);
+        MultiPlayer->resize(619, 386);
         action_local = new QAction(MultiPlayer);
         action_local->setObjectName(QString::fromUtf8("action_local"));
         centralwidget = new QWidget(MultiPlayer);
@@ -109,7 +109,7 @@ public:
         MultiPlayer->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MultiPlayer);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 627, 22));
+        menubar->setGeometry(QRect(0, 0, 619, 22));
         menu_media = new QMenu(menubar);
         menu_media->setObjectName(QString::fromUtf8("menu_media"));
         MultiPlayer->setMenuBar(menubar);
