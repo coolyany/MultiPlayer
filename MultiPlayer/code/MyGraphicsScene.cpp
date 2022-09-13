@@ -26,6 +26,7 @@ MyGraphicsScene::MyGraphicsScene(QObject *parent)
 
 MyGraphicsScene::~MyGraphicsScene()
 {
+
 }
 
 void MyGraphicsScene::setPixmap(const QPixmap & pix)

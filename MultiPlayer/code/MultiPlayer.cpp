@@ -10,6 +10,20 @@ MultiPlayer::MultiPlayer(QWidget *parent)
 	SignConnect();
 }
 
+MultiPlayer::~MultiPlayer()
+{
+	if (m_data)
+	{
+		delete  m_data;
+		m_data = nullptr;
+	}
+	if (m_pc)
+	{
+		delete m_pc;
+		m_pc = nullptr;
+	}
+}
+
 void MultiPlayer::init()
 {
 	m_data = new MyData();
@@ -18,6 +32,9 @@ void MultiPlayer::init()
 
 	m_pc->SetMyData(m_data);
 	ui.graphicsView->SetMyData(m_data);
+	ui.graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	ui.graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
 }
 
 void MultiPlayer::SignConnect()

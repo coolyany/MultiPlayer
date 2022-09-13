@@ -1,2 +1,3 @@
-﻿  MyGraphicsScene.cpp
+﻿  MultiPlayer.cpp
+  MyGraphicsView.cpp
   MultiPlayer.vcxproj -> D:\Code\MultiPlayer_graphics\x64\Debug\MultiPlayer.exe

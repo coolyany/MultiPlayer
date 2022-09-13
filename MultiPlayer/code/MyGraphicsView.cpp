@@ -17,11 +17,13 @@ MyGraphicsView::MyGraphicsView(QWidget *parent)
 	qgraphicsScene = new MyGraphicsScene(this);
 	setScene(qgraphicsScene);//Sets the current scene to scene. If scene is already being viewed, this function does nothing.
 	//this->setMouseTracking(true);
-
+	
 }
 
 MyGraphicsView::~MyGraphicsView()
 {
+	if (currentFrame)
+		av_frame_free(&currentFrame);
 }
 
 void MyGraphicsView::SetMyData(MyData * md)

@@ -9,7 +9,8 @@ XMediaThread::XMediaThread()
 
 XMediaThread::~XMediaThread()
 {
-
+	isExit = true;
+	wait();
 }
 
 bool XMediaThread::Open(const char * url, IVideoCall * call, int type)
