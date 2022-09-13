@@ -31,7 +31,8 @@ bool XMediaThread::Open(const char * url, IVideoCall * call, int type)
 	}
 
 	//打开视频解码器和处理线程
-	if (!m_vt->Open(m_media->CopyVPara(), call, m_media->width, m_media->height))
+	re = m_vt->Open(m_media->CopyVPara(), call, m_media->width, m_media->height);
+	if (!re)
 	{
 		re = false;
 		cout << "vt->Open failed!" << endl;

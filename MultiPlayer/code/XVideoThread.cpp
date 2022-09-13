@@ -23,6 +23,7 @@ bool XVideoThread::Open(AVCodecParameters * para, IVideoCall * call, int width, 
 		return false;
 	}
 	Clear();
+	vmux.lock();
 	synpts = 0;
 	//初始化显示窗口
 	this->call = call;

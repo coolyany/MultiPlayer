@@ -1,6 +1,8 @@
 #pragma once
 struct AVFrame;
 
-class IVideoCall {
+class IVideoCall 
+{
+public:
 	virtual void Repaint(AVFrame *image) = 0;
 };

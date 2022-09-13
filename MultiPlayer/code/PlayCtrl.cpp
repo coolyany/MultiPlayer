@@ -2,6 +2,7 @@
 
 PlayCtrl::PlayCtrl()
 {
+	m_mt = new XMediaThread();
 }
 
 PlayCtrl::~PlayCtrl()
@@ -25,6 +26,6 @@ bool PlayCtrl::OpenMedia(const QString & path, MyData::MyMediaWay way, IVideoCal
 			return false;
 		}
 		
-
+		m_mt->Start();
 	}
 }

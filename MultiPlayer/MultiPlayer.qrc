@@ -11,5 +11,6 @@
         <file>resource/min.png</file>
         <file>resource/restore.png</file>
         <file>resource/loading.jpg</file>
+        <file>resource/back.jpg</file>
     </qresource>
 </RCC>

@@ -111,9 +111,9 @@
     <None Include="qss\MaterialDark.qss" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\IVideoCall.cpp" />
     <ClCompile Include="code\LoadDialog.cpp" />
     <ClCompile Include="code\main.cpp" />
+    <ClCompile Include="code\MyConvert.cpp" />
     <ClCompile Include="code\MyData.cpp" />
     <ClCompile Include="code\MyGraphicsScene.cpp" />
     <ClCompile Include="code\MyGraphicsView.cpp" />
@@ -140,8 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="code\IVideoCall.h" />
-    <ClInclude Include="code\MultiPlayer.h" />
+    <QtMoc Include="code\MultiPlayer.h" />
     <QtMoc Include="code\titleBar.h" />
+    <ClInclude Include="code\MyConvert.h" />
     <ClInclude Include="code\MyData.h" />
     <QtMoc Include="code\PlayCtrl.h" />
     <QtMoc Include="code\MyGraphicsView.h" />

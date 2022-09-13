@@ -1,10 +1,20 @@
 #pragma once
 #include <QGraphicsView>
+#include <QTimer>
+#include <chrono>   
+#include <iostream>
+#include <ctime>
+#include <ratio>
 
+
+#include "MyData.h"
+#include "MyConvert.h"
+#include "MyGraphicsScene.h"
 #include "IVideoCall.h"
 
 class MyData;
-class MyGraphicsView : public QGraphicsView, public IVideoCall
+class MyGraphicsView : 
+	public QGraphicsView, public IVideoCall
 {
 	Q_OBJECT
 public:
@@ -17,6 +27,9 @@ public:
 	void resizeEvent(QResizeEvent* size);
 	void Repaint(AVFrame *image);
 
+	void slotUpdateUI();
+
+
 protected:
 	void mouseMoveEvent(QMouseEvent *event);
 	void mousePressEvent(QMouseEvent *event);
@@ -24,6 +37,7 @@ protected:
 	void mouseDoubleClickEvent(QMouseEvent *mouseEvent);
 private:
 	MyData *m_data = NULL;
+	MyGraphicsScene *qgraphicsScene = NULL;
 
 	//cv::Mat currentImage;//当前播放的图片
 	AVFrame *currentFrame = NULL;//当前显示的Frame

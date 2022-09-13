@@ -9,6 +9,7 @@
 #include <QFileDialog>
 
 class MultiPlayer : public QMainWindow {
+	Q_OBJECT
 public:
 	MultiPlayer(QWidget *parent = Q_NULLPTR);
 

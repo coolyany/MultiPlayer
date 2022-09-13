@@ -1,5 +1,6 @@
 #pragma once
 #include <qgraphicsscene.h>
+#include "PixItem.h"
 
 class MyGraphicsScene : public QGraphicsScene
 {
@@ -8,7 +9,12 @@ public:
 	MyGraphicsScene(QObject *parent = nullptr);
 	~MyGraphicsScene();
 
-private:
+	void setPixmap(const QPixmap &pix);
 
+
+private:
+	PixItem *m_pixItem = NULL;
+	int pixw;
+	int pixh;
 
 };
