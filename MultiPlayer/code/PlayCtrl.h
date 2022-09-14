@@ -17,6 +17,13 @@ public:
 public:
 	void SetMyData(MyData *data);
 	bool OpenMedia(const QString &path, MyData::MyMediaWay way, IVideoCall *call);
+
+	void SetPause(bool isPause);//ÔÝÍ£
+//²Ûº¯Êý
+public:
+	void slotPlayEnd();//²¥·Å½áÊø
+signals:
+	void playEnd();
 private:
 	MyData *m_data = nullptr;
 	MyData::MyMediaWay m_curType;

@@ -40,6 +40,8 @@ void MultiPlayer::init()
 void MultiPlayer::SignConnect()
 {
 	connect(ui.menu_media, &QMenu::triggered, this, &MultiPlayer::onClickActMedia);
+	connect(m_pc, &PlayCtrl::playEnd, this, &MultiPlayer::slotPlayEnd);
+	connect(ui.pushButton_play, &QPushButton::clicked, this, &MultiPlayer::slotPlayAndPause);
 }
 
 void MultiPlayer::onClickActMedia(QAction *act)
@@ -48,9 +50,43 @@ void MultiPlayer::onClickActMedia(QAction *act)
 	if (actName == QStringLiteral("本地媒体"))
 	{
 		playLocalMedia();
+		ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
+		m_isPause = false;
 	}
 
 
+}
+
+void MultiPlayer::slotPlayEnd()
+{
+	//switch (m_playModel)
+	//{
+	//case ORDER:
+	//	//顺序循环播放
+	//	playOrder();
+	//	break;
+	//case SINGLE:
+	//	//单循环播放
+	//	playSingle();
+	//	break;
+	//default:
+	//	break;
+	//}
+}
+
+void MultiPlayer::slotPlayAndPause()
+{
+	m_isPause = !m_isPause;
+	if (m_isPause)
+	{
+		ui.pushButton_play->setIcon(QIcon(":/tool/resource/play.png"));
+	}
+	else 
+	{
+		ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
+	}
+
+	m_pc->SetPause(m_isPause);
 }
 
 void MultiPlayer::playLocalMedia()

@@ -68,14 +68,21 @@
        <number>5</number>
       </property>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_play">
         <property name="text">
-         <string>播放</string>
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../MultiPlayer.qrc">
+          <normaloff>:/tool/resource/play.png</normaloff>:/tool/resource/play.png</iconset>
+        </property>
+        <property name="flat">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButton_stop">
         <property name="text">
          <string>停止</string>
         </property>
@@ -129,6 +136,8 @@
    <header>MyGraphicsView.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../MultiPlayer.qrc"/>
+ </resources>
  <connections/>
 </ui>

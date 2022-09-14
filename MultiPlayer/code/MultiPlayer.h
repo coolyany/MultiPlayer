@@ -20,6 +20,8 @@ public:
 //槽函数
 public:
 	void onClickActMedia(QAction *act);
+	void slotPlayEnd();
+	void slotPlayAndPause();//暂停和播放
 //方法函数
 public:
 	void playLocalMedia();
@@ -28,6 +30,7 @@ private:
 	MyData::MyMediaWay m_pw;
 	QString m_currentPath;
 	PlayCtrl *m_pc = nullptr;
+	bool m_isPause = false;
 private:
 	Ui::MultiPlayer ui;
 };

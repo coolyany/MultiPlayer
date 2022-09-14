@@ -3,11 +3,18 @@
 PlayCtrl::PlayCtrl()
 {
 	m_mt = new XMediaThread();
+
+	connect(m_mt, SIGNAL(PlayEnd()), this, SLOT(slotPlayEnd()));
+
 }
 
 PlayCtrl::~PlayCtrl()
 {
-	
+	/*if (m_mt)
+	{
+		delete m_mt;
+		m_mt = nullptr;
+	}*/
 }
 
 void PlayCtrl::SetMyData(MyData * data)
@@ -29,4 +36,15 @@ bool PlayCtrl::OpenMedia(const QString & path, MyData::MyMediaWay way, IVideoCal
 		
 		m_mt->Start();
 	}
+}
+
+void PlayCtrl::SetPause(bool isPause)
+{
+	m_mt->SetPause(isPause);
+}
+
+void PlayCtrl::slotPlayEnd()
+{
+	emit playEnd();
+
 }

@@ -42,11 +42,11 @@ void XVideoThread::run()
 {
 	while (!isExit)
 	{
-		/*if (this->isPause)
+		if (this->isPause)
 		{
 			msleep(5);
 			continue;
-		}*/
+		}
 		QTime t0 = QTime::currentTime(), t1;
 		if (mpt == 0)
 		{
@@ -116,5 +116,10 @@ void XVideoThread::run()
 		}
 
 	}
+}
+
+void XVideoThread::SetPause(bool isPause)
+{
+	this->isPause = isPause;
 }
 

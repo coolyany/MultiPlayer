@@ -10,6 +10,7 @@
 #define UI_MULTIPLAYER_H
 
 #include <QtCore/QVariant>
+#include <QtGui/QIcon>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
@@ -39,8 +40,8 @@ public:
     QSlider *horizontalSlider;
     QLabel *label_last;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *pushButton_play;
+    QPushButton *pushButton_stop;
     QSpacerItem *horizontalSpacer;
     QMenuBar *menubar;
     QMenu *menu_media;
@@ -89,15 +90,19 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setContentsMargins(-1, 5, -1, -1);
-        pushButton = new QPushButton(centralwidget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton_play = new QPushButton(centralwidget);
+        pushButton_play->setObjectName(QString::fromUtf8("pushButton_play"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/tool/resource/play.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_play->setIcon(icon);
+        pushButton_play->setFlat(true);
 
-        horizontalLayout_2->addWidget(pushButton);
+        horizontalLayout_2->addWidget(pushButton_play);
 
-        pushButton_2 = new QPushButton(centralwidget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_stop = new QPushButton(centralwidget);
+        pushButton_stop->setObjectName(QString::fromUtf8("pushButton_stop"));
 
-        horizontalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(pushButton_stop);
 
         horizontalSpacer = new QSpacerItem(444, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -131,8 +136,8 @@ public:
         action_local->setText(QCoreApplication::translate("MultiPlayer", "\346\234\254\345\234\260\345\252\222\344\275\223", nullptr));
         label_pre->setText(QCoreApplication::translate("MultiPlayer", "00:00", nullptr));
         label_last->setText(QCoreApplication::translate("MultiPlayer", "00:00", nullptr));
-        pushButton->setText(QCoreApplication::translate("MultiPlayer", "\346\222\255\346\224\276", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MultiPlayer", "\345\201\234\346\255\242", nullptr));
+        pushButton_play->setText(QString());
+        pushButton_stop->setText(QCoreApplication::translate("MultiPlayer", "\345\201\234\346\255\242", nullptr));
         menu_media->setTitle(QCoreApplication::translate("MultiPlayer", "\345\252\222\344\275\223", nullptr));
     } // retranslateUi
 

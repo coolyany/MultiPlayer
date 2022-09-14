@@ -157,3 +157,8 @@ bool XMediaThread::isEof()
 		return false;
 	}
 }
+
+void XMediaThread::SetPause(bool isPause)
+{
+	m_vt->SetPause(isPause);
+}

@@ -23,6 +23,7 @@ public:
 	virtual void Clear();
 	void run();
 	bool isEof();
+	void SetPause(bool isPause);
 signals:
 	void PlayEnd();
 
