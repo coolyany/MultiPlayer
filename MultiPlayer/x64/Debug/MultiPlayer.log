@@ -1,3 +1,11 @@
-﻿  MultiPlayer.cpp
-  MyGraphicsView.cpp
+﻿  moc code\XMediaThread.h
+  MultiPlayer.cpp
+  MyMainWidget.cpp
+  PlayCtrl.cpp
+  XMedia.cpp
+  XMediaThread.cpp
+d:\code\multiplayer_graphics\multiplayer\code\playctrl.cpp(32): warning C4715: “PlayCtrl::OpenMedia”: 不是所有的控件路径都返回值
+  moc_MultiPlayer.cpp
+  moc_PlayCtrl.cpp
+  moc_XMediaThread.cpp
   MultiPlayer.vcxproj -> D:\Code\MultiPlayer_graphics\x64\Debug\MultiPlayer.exe

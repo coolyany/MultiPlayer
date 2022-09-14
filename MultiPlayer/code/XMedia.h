@@ -13,6 +13,8 @@ public:
 	virtual bool Open(const char *url);
 	//关闭
 	virtual void Close();
+	//清理缓存
+	virtual void Clear();
 	//获取视频参数 返回的空间需要清理 avcodec_parameters_free
 	virtual AVCodecParameters *CopyVPara();
 	//空间需要调用释放，释放AVPacket对象空间，和数据空间 av_packet_free

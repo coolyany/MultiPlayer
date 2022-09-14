@@ -144,6 +144,19 @@ void XMedia::Close()
 
 }
 
+void XMedia::Clear()
+{
+	mux.lock();
+	if (!ic)
+	{
+		mux.unlock();
+		return;
+	}
+	//«Â¿Ì∂¡»°ª∫≥Â
+	avformat_flush(ic);
+	mux.unlock();
+}
+
 AVCodecParameters * XMedia::CopyVPara()
 {
 	mux.lock();

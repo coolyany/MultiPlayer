@@ -7,6 +7,7 @@ PlayCtrl::PlayCtrl()
 
 PlayCtrl::~PlayCtrl()
 {
+	
 }
 
 void PlayCtrl::SetMyData(MyData * data)

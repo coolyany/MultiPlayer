@@ -58,6 +58,37 @@ void XMediaThread::Start()
 	mux.unlock();
 }
 
+void XMediaThread::Close()
+{
+	isExit = true;
+	wait();
+	if (m_vt) m_vt->Close();
+	mux.lock();
+	delete m_vt;
+	//delete at;
+	m_vt = NULL;
+	//at = NULL;
+	mux.unlock();
+}
+
+void XMediaThread::Clear()
+{
+	mux.lock();
+	if (m_media)
+	{
+		m_media->Clear();
+	}
+	/*if (at)
+	{
+		at->Clear();
+	}*/
+	if (m_vt)
+	{
+		m_vt->Clear();
+	}
+	mux.unlock();
+}
+
 void XMediaThread::run()
 {
 	while (!isExit)
