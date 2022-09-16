@@ -48,6 +48,9 @@
       </item>
       <item>
        <widget class="QSlider" name="horizontalSlider">
+        <property name="maximum">
+         <number>99</number>
+        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -111,7 +114,7 @@
      <x>0</x>
      <y>0</y>
      <width>619</width>
-     <height>22</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_media">

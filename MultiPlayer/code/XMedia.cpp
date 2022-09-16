@@ -1,4 +1,4 @@
-#include "XMedia.h"
+ï»¿#include "XMedia.h"
 using namespace std;
 extern "C" {
 #include <libavformat/avformat.h>
@@ -19,29 +19,34 @@ XMedia::XMedia()
 	dmux.lock();
 	if (isFirst)
 	{
-		//³õÊ¼»¯·â×°¿â
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½×°ï¿½ï¿½
 		av_register_all();
 
-		//³õÊ¼»¯ÍøÂç¿â£¨¿ÉÒÔ´ò¿ªrtsp rtmp http Ð­ÒéµÄÁ÷Ã½ÌåÊÓÆµ£©
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£¨ï¿½ï¿½ï¿½Ô´ï¿½rtsp rtmp http Ð­ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½
 		//avformat_network_init();
 		isFirst = false;
 	}
 	dmux.unlock();
 }
 
+XMedia::~XMedia()
+{
+
+}
+
 bool XMedia::Open(const char * url)
 {
 	Close();
 
-	//²ÎÊýÉèÖÃ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	AVDictionary *opts = NULL;
-	//ÉèÖÃrtspÁ÷ÒÔtcpÐ­Òé´ò¿ª
+	//ï¿½ï¿½ï¿½ï¿½rtspï¿½ï¿½ï¿½ï¿½tcpÐ­ï¿½ï¿½ï¿½
 	av_dict_set(&opts, "rtsp_transport", "tcp", 0);
 
-	//ÍøÂçÑÓ³ÙÊ±¼ä
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ó³ï¿½Ê±ï¿½ï¿½
 	//av_dict_set(&opts, "max_delay", "500", 0);
-	//av_dict_set(&opts, "stimeout", "3000000", 0);  //ÉèÖÃ³¬Ê±¶Ï¿ªÁ¬½ÓÊ±¼ä
-	av_dict_set(&opts, "timeout", "3000000", 0);  //ÉèÖÃ³¬Ê±¶Ï¿ªÁ¬½ÓÊ±¼ä
+	//av_dict_set(&opts, "stimeout", "3000000", 0);  //ï¿½ï¿½ï¿½Ã³ï¿½Ê±ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	av_dict_set(&opts, "timeout", "3000000", 0);  //ï¿½ï¿½ï¿½Ã³ï¿½Ê±ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 
 	av_dict_set(&opts, "max_delay", "5000000", 0);
 	av_dict_set(&opts, "buffer_size", "10240000", 0);
@@ -50,14 +55,14 @@ bool XMedia::Open(const char * url)
 
 	//av_dict_set(&opts, "probesize", "1433600000", 0);
 
-	//ÉèÖÃlogÊä³öµÈ¼¶
+	//ï¿½ï¿½ï¿½ï¿½logï¿½ï¿½ï¿½ï¿½È¼ï¿½
 	av_log_set_level(AV_LOG_QUIET);
 	mux.lock();
 	int re = avformat_open_input(
 		&ic,
 		url,
-		0,      // 0 ±íÊ¾×Ô¶¯Ñ¡Ôñ½â·âÆ÷
-		&opts   // ²ÎÊýÉèÖÃ£¬±ÈÈçrtspµÄÑÓÊ±Ê±¼ä
+		0,      // 0 ï¿½ï¿½Ê¾ï¿½Ô¶ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		&opts   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½rtspï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½
 	);
 	if (re != 0)
 	{
@@ -69,7 +74,7 @@ bool XMedia::Open(const char * url)
 	}
 	cout << "open " << url << " success! " << endl;
 
-	//»ñÈ¡Á÷ÐÅÏ¢
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ï¢
 	re = avformat_find_stream_info(ic, 0);
 	if (re != 0)
 	{
@@ -80,7 +85,7 @@ bool XMedia::Open(const char * url)
 		return false;
 	}
 
-	//×ÜÊ±³¤ ºÁÃë
+	//ï¿½ï¿½Ê±ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	totalMs = ic->duration / (AV_TIME_BASE / 1000);
 	cout << "totalMs = " << totalMs << endl;
 	if (totalMs == 0)
@@ -94,10 +99,10 @@ bool XMedia::Open(const char * url)
 		return false;
 	}
 
-	//´òÓ¡ÊÓÆµÁ÷ÏêÏ¸ÐÅÏ¢
+	//ï¿½ï¿½Ó¡ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½Ï¢
 	av_dump_format(ic, 0, url, 0);
 
-	//»ñÈ¡ÊÓÆµÁ÷
+	//ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½
 	videoStream = av_find_best_stream(ic, AVMEDIA_TYPE_VIDEO, -1, -1, NULL, 0);
 	AVStream *as = ic->streams[videoStream];
 	width = as->codecpar->width;
@@ -106,7 +111,7 @@ bool XMedia::Open(const char * url)
 	int num = as->time_base.num;
 	int den = as->time_base.den;
 
-	//»ñÈ¡ÒôÆµÁ÷
+	//ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½
 	audioStream = av_find_best_stream(ic, AVMEDIA_TYPE_AUDIO, -1, -1, NULL, 0);
 	if (audioStream >= 0)
 	{
@@ -116,11 +121,11 @@ bool XMedia::Open(const char * url)
 		channels = as->codecpar->channels;
 
 		cout << "===================================================" << endl;
-		cout << audioStream << "ÒôÆµÐÅÏ¢" << endl;
+		cout << audioStream << "ï¿½ï¿½Æµï¿½ï¿½Ï¢" << endl;
 		cout << "sample_rate = " << as->codecpar->sample_rate << endl;
 		//AVSampleFormat
 		cout << "channels = " << as->codecpar->channels << endl;
-		//Ò»Ö¡Êý¾Ý?? µ¥Í¨µÀÑù±¾Êý
+		//Ò»Ö¡ï¿½ï¿½ï¿½ï¿½?? ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		cout << "frame_size = " << as->codecpar->frame_size << endl;
 		//1024 * 2 *2=4096 fps = sample_rate/frame_size
 	}
@@ -152,7 +157,7 @@ void XMedia::Clear()
 		mux.unlock();
 		return;
 	}
-	//ÇåÀí¶ÁÈ¡»º³å
+	//ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½
 	avformat_flush(ic);
 	mux.unlock();
 }
@@ -178,7 +183,7 @@ AVPacket * XMedia::Read()
 		return NULL;
 	}
 	AVPacket *pkt = av_packet_alloc();
-	//¶ÁÈ¡Ò»Ö¡²¢·ÖÅä¿Õ¼ä
+	//ï¿½ï¿½È¡Ò»Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¼ï¿½
 	int re = av_read_frame(ic, pkt);
 	if (re != 0)
 	{
@@ -189,7 +194,7 @@ AVPacket * XMedia::Read()
 		av_packet_free(&pkt);
 		return NULL;
 	}
-	//pts×ª»»ÎªºÁÃë
+	//pts×ªï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
 	pkt->pts = pkt->pts*(1000 * (r2d(ic->streams[pkt->stream_index]->time_base)));
 	pkt->dts = pkt->dts*(1000 * (r2d(ic->streams[pkt->stream_index]->time_base)));
 

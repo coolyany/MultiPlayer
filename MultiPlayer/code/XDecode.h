@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <mutex>
 
 struct AVCodecParameters;
@@ -14,20 +14,20 @@ public:
 	XDecode();
 	virtual~XDecode();
 
-	//´ò¿ª½âÂëÆ÷,²»¹Ü³É¹¦Óë·ñ¶¼²¢ÊÍ·Åpara¿Õ¼ä
+	//ï¿½ò¿ª½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ü³É¹ï¿½ï¿½ï¿½ñ¶¼²ï¿½ï¿½Í·ï¿½paraï¿½Õ¼ï¿½
 	virtual bool Open(AVCodecParameters *para);
-	//ÇåÀí¹Ø±Õ»º´æ
+	//ï¿½ï¿½ï¿½ï¿½Ø±Õ»ï¿½ï¿½ï¿½
 	virtual void Close();
 	virtual void Clear();
-	//·¢ËÍµ½½âÂëÏß³Ì£¬²»¹Ü³É¹¦Óë·ñ¶¼ÊÍ·Åpkt¿Õ¼ä£¨¶ÔÏóºÍÃ½ÌåÄÚÈİ£©
+	//ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì£ï¿½ï¿½ï¿½ï¿½Ü³É¹ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½pktï¿½Õ¼ä£¨ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½
 	virtual bool Send(AVPacket *pkt);
-	//»ñÈ¡½âÂëÊı¾İ,Ò»´Îsend¿ÉÄÜĞèÒª¶à´ÎRecv£¬»ñÈ¡»º³åÖĞµÄÊı¾İSend NULLÔÚRecv¶à´Î
-	//Ã¿´Î¸´ÖÆÒ»·İ£¬ÓÉµ÷ÓÃÕßÊÍ·Å av_frame_free
+	//è·å–è§£ç æ•°æ®,ä¸€æ¬¡sendå¯èƒ½éœ€è¦å¤šæ¬¡Recvï¼Œè·å–ç¼“å†²ä¸­çš„æ•°æ®Send NULLåœ¨Recvå¤šæ¬¡
+	//æ¯æ¬¡å¤åˆ¶ä¸€ä»½ï¼Œç”±è°ƒç”¨è€…é‡Šæ”¾ av_frame_free
 	virtual AVFrame *Recv();
 
-	//µ±Ç°½âÂëµ½µÄpts
+	//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½pts
 	long long pts = 0;
 protected:
-	AVCodecContext * codec = 0;
+	AVCodecContext * codec = nullptr;
 	std::mutex mux;
 };

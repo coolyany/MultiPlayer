@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <QThread>
 #include <mutex>
@@ -16,14 +16,16 @@ public:
 
 public:
 	virtual bool Open(const char *url, IVideoCall *call, int type = 0);
-	//Æô¶¯ËùÓÐÏß³Ì
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 	virtual void Start();
-	//¹Ø±ÕÏß³ÌÇåÀí×ÊÔ´
+	//ï¿½Ø±ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´
 	virtual void Close();
 	virtual void Clear();
 	void run();
 	bool isEof();
 	void SetPause(bool isPause);
+	long long GetPlayPts() const;
+
 signals:
 	void PlayEnd();
 
@@ -31,8 +33,12 @@ public:
 	bool isExit = false;
 	long long pts = 0;
 	long long totalMs = 0;
+	bool isPause = false;
+
 private:
 	XMedia *m_media = nullptr;
 	XVideoThread *m_vt = nullptr;
 	std::mutex mux;
+	int m_pt = 0;//æ’­æ”¾ç±»åž‹ 0 æœ¬åœ°æ–‡ä»¶ 1 ç½‘ç»œæ–‡ä»¶
+
 };

@@ -1,7 +1,2 @@
-﻿  uic code\MultiPlayer.ui
-  rcc MultiPlayer.qrc
-  MultiPlayer.cpp
-  MyMainWidget.cpp
-  moc_MultiPlayer.cpp
-  qrc_MultiPlayer.cpp
-  MultiPlayer.vcxproj -> D:\Code\MultiPlayer_graphics\x64\Debug\MultiPlayer.exe
+﻿  MultiPlayer.cpp
+  MultiPlayer.vcxproj -> D:\TEST\MultiPlayer_gra\MultiPlayer\x64\Debug\MultiPlayer.exe

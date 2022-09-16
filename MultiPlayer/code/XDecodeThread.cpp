@@ -1,8 +1,8 @@
-#include "XDecodeThread.h"
+ï»¿#include "XDecodeThread.h"
 #include <QDebug>
 XDecodeThread::XDecodeThread()
 {
-	//´ò¿ª½âÂëÆ÷
+	//ï¿½ò¿ª½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (!decode)
 	{
 		decode = new XDecode();
@@ -42,7 +42,7 @@ AVPacket * XDecodeThread::Pop()
 void XDecodeThread::Push(AVPacket * pkt)
 {
 	if (!pkt) return;
-	//×èÈû
+	//ï¿½ï¿½ï¿½ï¿½
 	while (!isExit)
 	{
 		qDebug() << "packs_size:" << packs.size();
@@ -73,7 +73,7 @@ void XDecodeThread::Clear()
 void XDecodeThread::Close()
 {
 	Clear();
-	//µÈ´ýÏß³ÌÍË³ö
+	//ï¿½È´ï¿½ï¿½ß³ï¿½ï¿½Ë³ï¿½
 	isExit = true;
 	wait();
 	decode->Close();

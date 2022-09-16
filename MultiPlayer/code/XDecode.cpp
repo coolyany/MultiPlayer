@@ -1,4 +1,4 @@
-#include "XDecode.h"
+ï»¿#include "XDecode.h"
 extern "C"
 {
 #include <libavcodec/avcodec.h>
@@ -18,8 +18,8 @@ bool XDecode::Open(AVCodecParameters * para)
 {
 	if (!para) return false;
 	Close();
-	//½âÂëÆ÷´ò¿ª
-	//ÕÒµ½½âÂëÆ÷
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	AVCodec *vcodec = avcodec_find_decoder(para->codec_id);
 	if (!vcodec)
 	{
@@ -32,13 +32,13 @@ bool XDecode::Open(AVCodecParameters * para)
 	mux.lock();
 	codec = avcodec_alloc_context3(vcodec);
 
-	//ÅäÖÃ½âÂëÆ÷ÉÏÏÂÎÄ²ÎÊý
+	//ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½
 	avcodec_parameters_to_context(codec, para);
 	avcodec_parameters_free(&para);
-	//°ËÏß³Ì½âÂëÆ÷
+	//ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½
 	codec->thread_count = 8;
 
-	//´ò¿ª½âÂëÆ÷ÉÏÏÂÎÄ
+	//ï¿½ò¿ª½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int re = avcodec_open2(codec, 0, 0);
 	if (re != 0)
 	{
@@ -70,7 +70,7 @@ void XDecode::Close()
 void XDecode::Clear()
 {
 	mux.lock();
-	//ÇåÀí½âÂë»º³å
+	//æ¸…ç†è§£ç ç¼“å†²
 	if (codec)
 	{
 		avcodec_flush_buffers(codec);
@@ -78,9 +78,10 @@ void XDecode::Clear()
 	mux.unlock();
 }
 
+//å‘é€åˆ°è§£ç çº¿ç¨‹ï¼Œä¸ç®¡æˆåŠŸä¸Žå¦éƒ½é‡Šæ”¾pktç©ºé—´ï¼ˆå¯¹è±¡å’Œåª’ä½“å†…å®¹ï¼‰
 bool XDecode::Send(AVPacket * pkt)
 {
-	//ÈÝ´í´¦Àí
+	//å®¹é”™å¤„ç†
 	if (!pkt || pkt->size <= 0 || !pkt->data) return false;
 	//mux.lock();
 	if (!codec)

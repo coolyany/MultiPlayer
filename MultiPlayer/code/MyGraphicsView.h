@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <QGraphicsView>
 #include <QTimer>
 #include <chrono>   
@@ -39,6 +39,6 @@ private:
 	MyData *m_data = NULL;
 	MyGraphicsScene *qgraphicsScene = NULL;
 
-	//cv::Mat currentImage;//µ±Ç°²¥·ÅµÄÍ¼Æ¬
-	AVFrame *currentFrame = NULL;//µ±Ç°ÏÔÊ¾µÄFrame
+	//cv::Mat currentImage;//ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Åµï¿½Í¼Æ¬
+	AVFrame *currentFrame = NULL;//ï¿½ï¿½Ç°ï¿½ï¿½Ê¾ï¿½ï¿½Frame
 };

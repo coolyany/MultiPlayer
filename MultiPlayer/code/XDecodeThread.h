@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <list>
 #include <mutex>
 #include <QThread>
@@ -12,17 +12,17 @@ public:
 	XDecodeThread();
 	virtual ~XDecodeThread();
 	virtual bool isPacketsEmpty();
-	//È¡³öÒ»Ö¡Êý¾Ý£¬²¢³öÕ»,Èç¹ûÃ»ÓÐÔò·µ»ØNULL
+	//È¡ï¿½ï¿½Ò»Ö¡ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½Õ»,ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ò·µ»ï¿½NULL
 	virtual AVPacket *Pop();
 	virtual void Push(AVPacket *pkt);
 
-	//ÇåÀí¶ÓÁÐ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	virtual void Clear();
-	//ÇåÀí×ÊÔ´£¬Í£Ö¹Ïß³Ì
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½ï¿½Í£Ö¹ï¿½ß³ï¿½
 	virtual void Close();
 
 	XDecode *decode = nullptr;
-	//×î´ó¶ÓÁÐ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	int maxList = 1000;
 	bool isExit = false;
 protected:

@@ -1,4 +1,4 @@
-#include "XVideoThread.h"
+ï»¿#include "XVideoThread.h"
 extern "C"
 {
 #include <libavcodec/avcodec.h>
@@ -25,7 +25,7 @@ bool XVideoThread::Open(AVCodecParameters * para, IVideoCall * call, int width, 
 	Clear();
 	vmux.lock();
 	synpts = 0;
-	//³õÊ¼»¯ÏÔÊ¾´°¿Ú
+	//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½
 	this->call = call;
 	vmux.unlock();
 
@@ -50,7 +50,6 @@ void XVideoThread::run()
 		QTime t0 = QTime::currentTime(), t1;
 		if (mpt == 0)
 		{
-			//ÒôÊÓÆµÍ¬²½
 			if (isHasAudio)
 			{
 				if (synpts > 0 && synpts < decode->pts)
@@ -67,7 +66,7 @@ void XVideoThread::run()
 			msleep(1);
 			continue;
 		}
-		//Ò»´Îsend ¶à´Îrecv
+		//ä¸€æ¬¡send å¤šæ¬¡recv
 		while (!isExit)
 		{
 			AVFrame *frame = decode->Recv();
@@ -84,7 +83,7 @@ void XVideoThread::run()
 			{
 				seekpts = -1;
 			}
-			//ÏÔÊ¾ÊÓÆµ
+			//æ˜¾ç¤ºè§†é¢‘
 			if (call)
 			{
 				pts = decode->pts;

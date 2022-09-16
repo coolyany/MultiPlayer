@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <QObject>
 
 #include "IVideoCall.h"
@@ -13,15 +13,20 @@ public:
 	PlayCtrl();
 	~PlayCtrl();
 
-//·½·¨º¯Êı
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public:
 	void SetMyData(MyData *data);
 	bool OpenMedia(const QString &path, MyData::MyMediaWay way, IVideoCall *call);
 
-	void SetPause(bool isPause);//ÔİÍ£
-//²Ûº¯Êı
+	void SetPause(bool isPause);//ï¿½ï¿½Í£
+	void Close();
+
+	long long GetTotalMS() const;//è·å–æ€»æ—¶é•¿
+	long long GetPlayPts() const;//è·å–å·²æ’­æ”¾æ—¶é•¿
+
+//ï¿½Ûºï¿½ï¿½ï¿½
 public:
-	void slotPlayEnd();//²¥·Å½áÊø
+	void slotPlayEnd();//ï¿½ï¿½ï¿½Å½ï¿½ï¿½ï¿½
 signals:
 	void playEnd();
 private:

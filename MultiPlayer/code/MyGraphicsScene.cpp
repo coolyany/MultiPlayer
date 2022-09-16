@@ -1,4 +1,4 @@
-#include "MyGraphicsScene.h"
+ï»¿#include "MyGraphicsScene.h"
 
 MyGraphicsScene::MyGraphicsScene(QObject *parent)
 	: QGraphicsScene(parent)
@@ -7,7 +7,7 @@ MyGraphicsScene::MyGraphicsScene(QObject *parent)
 
 	QPixmap pix;
 	pix.load(path);
-	//¸³Öµ¸ß¡¢¿í
+	//ï¿½ï¿½Öµï¿½ß¡ï¿½ï¿½ï¿½
 	pixw = pix.width();
 	pixh = pix.height();
 	m_pixItem = new PixItem(&pix);

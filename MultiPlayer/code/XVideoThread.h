@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <mutex>
 #include <QThread>
@@ -13,21 +13,20 @@ public:
 	~XVideoThread();
 
 public:
-	// ´ò¿ª£¬²»¹Ü³É¹¦Óë·ñ¶¼ÇåÀí
+	//æ‰“å¼€ï¼Œä¸ç®¡æˆåŠŸä¸å¦éƒ½æ¸…ç†
 	virtual bool Open(AVCodecParameters *para, IVideoCall *call, int width, int height);
 	void run();
 	void SetPause(bool isPause);
 public:
-	//Í¬²½Ê±¼ä£¬ÓÉÍâ²¿´«Èë
+	//åŒæ­¥æ—¶é—´ï¼Œç”±å¤–éƒ¨ä¼ å…¥
 	long long synpts = 0;
 	long long pts = 0;
-	//void SetPause(bool ipause);
 	bool isPause = false;
 	IVideoCall *call = NULL;
-	int mpt = 0;//²¥·ÅÀàĞÍ£¬ 0±¾µØÎÄ¼ş 1ÍøÂçÎÄ¼ş
-	bool isHasAudio = false;//ÊÇ·ñÓĞÒôÆµ
-	long long seekpts = 0;//seekÊ±¼ä£¬Íâ²¿´«Èë
-	float playspeed = 1.0;//±¶ÂÊ
+	int mpt = 0;//æ’­æ”¾ç±»å‹ï¼Œ 0æœ¬åœ°æ–‡ä»¶ 1ç½‘ç»œæ–‡ä»¶
+	bool isHasAudio = false;//æ˜¯å¦æœ‰éŸ³é¢‘
+	long long seekpts = 0;//seekæ—¶é—´ï¼Œå¤–éƒ¨ä¼ å…¥
+	float playspeed = 1.0;//å€ç‡
 protected:
 	std::mutex vmux;
 	int timeelapsed = 0;

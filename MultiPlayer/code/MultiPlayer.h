@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <QtWidgets/QMainWindow>
 #include "ui_MultiPlayer.h"
@@ -7,30 +7,37 @@
 #include "PlayCtrl.h"
 
 #include <QFileDialog>
+#include <QTimerEvent>
 
 class MultiPlayer : public QMainWindow {
 	Q_OBJECT
 public:
 	MultiPlayer(QWidget *parent = Q_NULLPTR);
 	~MultiPlayer();
-//³õÊ¼»¯º¯Êý
+//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public:
 	void init();//initialize the set
 	void SignConnect();//initialize the connect
-//²Ûº¯Êý
+//ï¿½Ûºï¿½ï¿½ï¿½
 public:
 	void onClickActMedia(QAction *act);
 	void slotPlayEnd();
-	void slotPlayAndPause();//ÔÝÍ£ºÍ²¥·Å
-//·½·¨º¯Êý
+	void slotPlayAndPause();//ï¿½ï¿½Í£ï¿½Í²ï¿½ï¿½ï¿½
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 public:
 	void playLocalMedia();
+	QString Time2Char(long long time) const;
+protected:
+	void timerEvent(QTimerEvent *event) override;
 private:
 	MyData *m_data = nullptr;
 	MyData::MyMediaWay m_pw;
 	QString m_currentPath;
 	PlayCtrl *m_pc = nullptr;
 	bool m_isPause = false;
+	bool isSliderPress = false;
+	//QTimer m_timer;
+	int timerID = -1;
 private:
 	Ui::MultiPlayer ui;
 };

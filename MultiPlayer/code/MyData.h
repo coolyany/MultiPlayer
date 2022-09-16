@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 
 extern "C"
@@ -18,8 +18,8 @@ public:
 	void PushSaveFrame(AVFrame *frame);
 
 
-	int vW = 0;//µ±Ç°ÊÓÆµµÄ¿í
-	int vH = 0;//µ±Ç°ÊÓÆµµÄ¸ß
+	int vW = 0;//ï¿½ï¿½Ç°ï¿½ï¿½Æµï¿½Ä¿ï¿½
+	int vH = 0;//ï¿½ï¿½Ç°ï¿½ï¿½Æµï¿½Ä¸ï¿½
 private:
 
 

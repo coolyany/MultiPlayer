@@ -1,4 +1,4 @@
-#include "MyConvert.h"
+ï»¿#include "MyConvert.h"
 
 extern "C" {
 #include <libavformat/avformat.h>
@@ -56,7 +56,7 @@ QImage *MyConvert::AVFrame2QImage(AVFrame *avframe)
 	uint8_t *data[AV_NUM_DATA_POINTERS];
 	data[0] = (uint8_t *)(char*)image->bits();
 	int linesize[AV_NUM_DATA_POINTERS] = { 0 };
-	linesize[0] = w * 4;//Ã¿Ò»ÐÐµÄ¿í¶È
+	linesize[0] = w * 4;//Ã¿Ò»ï¿½ÐµÄ¿ï¿½ï¿½
 	int hii = sws_scale(sws_ctx, avframe->data, avframe->linesize, 0, avframe->height,
 		data,
 		linesize
@@ -172,41 +172,41 @@ AVFrame *MyConvert::YUV420_To_AVFrame(unsigned char* pYUV420, int width, int hei
 	//	return NULL;
 	//}
 
-	//³õÊ¼»¯AVFrame
+	//ï¿½ï¿½Ê¼ï¿½ï¿½AVFrame
 	AVFrame *frame = av_frame_alloc();
 	frame->width = width;
 	frame->height = height;
 	frame->format = AV_PIX_FMT_YUV420P;
-	//³õÊ¼»¯frame-> linesize
-	//avpicture_fill((AVPicture *)frame£¬NULL£¬frame->format£¬frame->width£¬frame->height);
+	//ï¿½ï¿½Ê¼ï¿½ï¿½frame-> linesize
+	//avpicture_fill((AVPicture *)frameï¿½ï¿½NULLï¿½ï¿½frame->formatï¿½ï¿½frame->widthï¿½ï¿½frame->height);
 
-	//ÊÖ¶¯ÉèÖÃframe-> dataÖ¸Õë
+	//ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½frame-> dataÖ¸ï¿½ï¿½
 	//frame->data[0] = inputBufferY;
 	//frame->data[1] = inputBufferU;
 	//frame->data[2] = inputBufferV;
 
-	//»òÕß£¬Èç¹ûÄúµÄY£¬U£¬V»º³åÇøÊÇÁ¬ÐøµÄ²¢ÇÒ¾ßÓÐÕýÈ·µÄ´óÐ¡£¬ÔòÖ»ÐèÊ¹ÓÃ£º
-	//avpicture_fill£¨£¨AVPicture *£©frame£¬inputBufferYUV£¬frame-> format£¬frame-> width£¬frame-> height£©;
+	//ï¿½ï¿½ï¿½ß£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Yï¿½ï¿½Uï¿½ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½Ò¾ï¿½ï¿½ï¿½ï¿½ï¿½È·ï¿½Ä´ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ê¹ï¿½Ã£ï¿½
+	//avpicture_fillï¿½ï¿½ï¿½ï¿½AVPicture *ï¿½ï¿½frameï¿½ï¿½inputBufferYUVï¿½ï¿½frame-> formatï¿½ï¿½frame-> widthï¿½ï¿½frame-> heightï¿½ï¿½;
 	avpicture_fill((AVPicture *)frame, pYUV420, (AVPixelFormat)frame->format, frame->width, frame->height);
 	return frame;
-	////Èç¹ûÒª/ÐèÒª²Ù×÷ÊäÈëÊý¾ÝµÄ¸±±¾£¬ÔòÐèÒª¼ÆËãËùÐèµÄ»º³åÇø´óÐ¡£¬È»ºóÔÚÆäÖÐ¸´ÖÆÊäÈëÊý¾Ý¡£
-	////³õÊ¼»¯AVFrame
-	//AVFrame *¿ò¼Ü = avcodec_alloc_frame£¨£©;
+	////ï¿½ï¿½ï¿½Òª/ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½È»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+	////ï¿½ï¿½Ê¼ï¿½ï¿½AVFrame
+	//AVFrame *ï¿½ï¿½ï¿½ = avcodec_alloc_frameï¿½ï¿½ï¿½ï¿½;
 	//frame->width = width;
-	//¿ò¼Ü->¸ß¶È = ¸ß¶È;
+	//ï¿½ï¿½ï¿½->ï¿½ß¶ï¿½ = ï¿½ß¶ï¿½;
 	//frame->format = AV_PIX_FMT_YUV420P;
 
-	////·ÖÅä×ã¹»´óµÄ»º³åÇøÒÔÈÝÄÉËùÓÐÊý¾Ý
-	//int size = avpicture_get_size£¨frame->format£¬frame->width£¬frame->height£©;
-	//uint8_t *»º³åÇø = £¨uint8_t * £©av_malloc£¨´óÐ¡£©;
+	////ï¿½ï¿½ï¿½ï¿½ï¿½ã¹»ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//int size = avpicture_get_sizeï¿½ï¿½frame->formatï¿½ï¿½frame->widthï¿½ï¿½frame->heightï¿½ï¿½;
+	//uint8_t *ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = ï¿½ï¿½uint8_t * ï¿½ï¿½av_mallocï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½;
 
-	////³õÊ¼»¯frame-> linesizeºÍframe-> dataÖ¸Õë
-	//avpicture_fill£¨£¨AVPicture *£©frame£¬buffer£¬frame->format£¬frame->width£¬frame->height£©; ¸´ÖÆ´úÂë
+	////ï¿½ï¿½Ê¼ï¿½ï¿½frame-> linesizeï¿½ï¿½frame-> dataÖ¸ï¿½ï¿½
+	//avpicture_fillï¿½ï¿½ï¿½ï¿½AVPicture *ï¿½ï¿½frameï¿½ï¿½bufferï¿½ï¿½frame->formatï¿½ï¿½frame->widthï¿½ï¿½frame->heightï¿½ï¿½; ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ï¿½
 
-	//	//´Ó3¸öÊäÈë»º³åÇø¸´ÖÆÊý¾Ý
-	//	memcpy£¨frame->data[0]£¬inputBufferY£¬frame->linesize[0] * frame->height£©;
-	//memcpy£¨frame->data[1]£¬inputBufferU£¬frame->linesize[1] * frame->height / 2£©;
-	//memcpy£¨frame->data[2]£¬inputBufferV£¬frame->linesize[2] * frame->height / 2£©;
+	//	//ï¿½ï¿½3ï¿½ï¿½ï¿½ï¿½ï¿½ë»ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//	memcpyï¿½ï¿½frame->data[0]ï¿½ï¿½inputBufferYï¿½ï¿½frame->linesize[0] * frame->heightï¿½ï¿½;
+	//memcpyï¿½ï¿½frame->data[1]ï¿½ï¿½inputBufferUï¿½ï¿½frame->linesize[1] * frame->height / 2ï¿½ï¿½;
+	//memcpyï¿½ï¿½frame->data[2]ï¿½ï¿½inputBufferVï¿½ï¿½frame->linesize[2] * frame->height / 2ï¿½ï¿½;
 }
 
 IplImage *MyConvert::AVFrameToIplImage(AVFrame *frame)
@@ -294,7 +294,7 @@ AVFrame *MyConvert::nv12_to_yuv420p(AVFrame *nv12_frame)
 	frame->width = nv12_frame->width;
 	frame->height = nv12_frame->height;
 
-	//2. 32ÎªÄÚ´æ¶ÔÆëÐèÒª£¬ºÍ¼ÆËã»úÄÚ´æ´æ´¢·½Ê½ÓÐ¹Ø£¬Ä¿Ç°Ò»°ã¾ùÎª32
+	//2. 32Îªï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½æ´¢ï¿½ï¿½Ê½ï¿½Ð¹Ø£ï¿½Ä¿Ç°Ò»ï¿½ï¿½ï¿½Îª32
 	//alloc frame->data memory
 	int ret = av_frame_get_buffer(frame, 32);
 	if (ret < 0)
@@ -343,7 +343,7 @@ AVFrame *MyConvert::yuv420p_to_nv12(AVFrame *yuv420p_frame)
 	frame->width = yuv420p_frame->width;
 	frame->height = yuv420p_frame->height;
 
-	//2. 32ÎªÄÚ´æ¶ÔÆëÐèÒª£¬ºÍ¼ÆËã»úÄÚ´æ´æ´¢·½Ê½ÓÐ¹Ø£¬Ä¿Ç°Ò»°ã¾ùÎª32
+	//2. 32Îªï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½æ´¢ï¿½ï¿½Ê½ï¿½Ð¹Ø£ï¿½Ä¿Ç°Ò»ï¿½ï¿½ï¿½Îª32
 	//alloc frame->data memory
 	int ret = av_frame_get_buffer(frame, 32);
 	if (ret < 0)

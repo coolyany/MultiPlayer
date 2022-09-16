@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <mutex>
 struct AVFormatContext;
@@ -8,16 +8,17 @@ struct AVCodecParameters;
 class XMedia {
 public:
 	XMedia();
+	virtual ~XMedia();
 
-	//´ò¿ªÃ½ÌåÎÄ¼ş£¬»òÕßÁ÷Ã½Ìå rtmp http rstp
+	//ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ rtmp http rstp
 	virtual bool Open(const char *url);
-	//¹Ø±Õ
+	//ï¿½Ø±ï¿½
 	virtual void Close();
-	//ÇåÀí»º´æ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	virtual void Clear();
-	//»ñÈ¡ÊÓÆµ²ÎÊı ·µ»ØµÄ¿Õ¼äĞèÒªÇåÀí avcodec_parameters_free
+	//ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ØµÄ¿Õ¼ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ avcodec_parameters_free
 	virtual AVCodecParameters *CopyVPara();
-	//¿Õ¼äĞèÒªµ÷ÓÃÊÍ·Å£¬ÊÍ·ÅAVPacket¶ÔÏó¿Õ¼ä£¬ºÍÊı¾İ¿Õ¼ä av_packet_free
+	//ï¿½Õ¼ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½Í·Å£ï¿½ï¿½Í·ï¿½AVPacketï¿½ï¿½ï¿½ï¿½Õ¼ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½İ¿Õ¼ï¿½ av_packet_free
 	virtual AVPacket *Read();
 
 public:
@@ -28,16 +29,16 @@ public:
 	int sampleRate = 0;
 	int channels = 0;
 
-	//ÒôÊÓÆµË÷Òı£¬¶ÁÈ¡Ê±Çø·ÖÒôÊÓÆµ
+	//ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
 	int videoStream = 0;
 	int audioStream = 1;
 
-	bool isEof = false;//ÅĞ¶ÏÎÄ¼ş»òÕßÍøÂçÊÇ·ñ½áÊø
+	bool isEof = false;//ï¿½Ğ¶ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½
 
 protected:
 	std::mutex mux;
 
-	//½â·â×°ÉÏÏÂÎÄ
+	//ï¿½ï¿½ï¿½×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	AVFormatContext *ic = NULL;
 
 	AVFormatContext *ofmt_ctx = NULL;

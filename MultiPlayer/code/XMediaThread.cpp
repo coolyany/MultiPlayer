@@ -1,4 +1,4 @@
-#include "XMediaThread.h"
+ï»¿#include "XMediaThread.h"
 
 using namespace std;
 
@@ -30,14 +30,15 @@ bool XMediaThread::Open(const char * url, IVideoCall * call, int type)
 		cout << "demux->Open(url) failed!" << endl;
 		return false;
 	}
-
-	//´ò¿ªÊÓÆµ½âÂëÆ÷ºÍ´¦ÀíÏß³Ì
+	m_pt = type;
+	//ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í´ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 	re = m_vt->Open(m_media->CopyVPara(), call, m_media->width, m_media->height);
 	if (!re)
 	{
 		re = false;
 		cout << "vt->Open failed!" << endl;
 	}
+	totalMs = m_media->totalMs;
 
 
 	isExit = false;
@@ -50,9 +51,9 @@ void XMediaThread::Start()
 	if (!m_media) m_media = new XMedia();
 	if (!m_vt) m_vt = new XVideoThread();
 	//if (!at) at = new XAudioThread();
-	//Æô¶¯µ±Ç°Ïß³Ì
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ß³ï¿½
 	QThread::start();
-	//Æô¶¯ÊÓÆµ½âÂëÏß³Ì
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
 	if (m_vt) m_vt->start();
 	//if (at) at->start();
 	mux.unlock();
@@ -60,6 +61,7 @@ void XMediaThread::Start()
 
 void XMediaThread::Close()
 {
+	isPause = false;
 	isExit = true;
 	wait();
 	if (m_vt) m_vt->Close();
@@ -94,17 +96,17 @@ void XMediaThread::run()
 	while (!isExit)
 	{
 		
-		/*if (isPause)
+		if (isPause && m_pt == 0)//å½“æš‚åœå¹¶ä¸”æœ¬åœ°æ’­æ”¾æ—¶ ï¼ˆ0è¡¨ç¤ºæœ¬åœ°ï¼‰
 		{
 			msleep(5);
 			continue;
-		}*/
+		}
 		if (!m_media)
 		{
 			msleep(5);
 			continue;
 		}
-		//ÒôÊÓÆµÍ¬²½
+		//ï¿½ï¿½ï¿½ï¿½ÆµÍ¬ï¿½ï¿½
 		/*if (m_pt == 0)
 		{
 			if (vt && at)
@@ -121,18 +123,18 @@ void XMediaThread::run()
 			{
 				//isExit = true;
 				emit PlayEnd();
-				//ÖØÍ·¿ªÊ¼²¥·Å
+				//ï¿½ï¿½Í·ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½
 				//Seek(0.0);
 			}
 			msleep(5);
 			continue;
 		}
-		//ÅÐ¶ÏÊý¾ÝÎªÒôÆµ
+		//ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Æµ
 		//if (m_media->isAudio(pkt))
 		//{
 		//	if (at)	at->Push(pkt);
 		//}
-		//else //ÊÓÆµ
+		//else //ï¿½ï¿½Æµ
 		//{
 			if (m_vt)	m_vt->Push(pkt);
 			/*if (demux->isRecord)
@@ -150,7 +152,6 @@ bool XMediaThread::isEof()
 	if (m_media->isEof && /*at->isPacketsEmpty() &&*/ m_vt->isPacketsEmpty())
 	{
 		return true;
-		//emit PlayEnd();
 	}
 	else
 	{
@@ -160,5 +161,18 @@ bool XMediaThread::isEof()
 
 void XMediaThread::SetPause(bool isPause)
 {
-	m_vt->SetPause(isPause);
+	this->isPause = isPause;
+	if (m_vt)
+	{
+		m_vt->SetPause(isPause);
+	}
+}
+
+long long XMediaThread::GetPlayPts() const
+{
+	if (m_vt)
+		return m_vt->pts;
+	else
+		return 0;
+	
 }

@@ -1,4 +1,4 @@
-#include "PlayCtrl.h"
+ï»¿#include "PlayCtrl.h"
 
 PlayCtrl::PlayCtrl()
 {
@@ -10,11 +10,11 @@ PlayCtrl::PlayCtrl()
 
 PlayCtrl::~PlayCtrl()
 {
-	/*if (m_mt)
+	if (m_mt)
 	{
 		delete m_mt;
 		m_mt = nullptr;
-	}*/
+	}
 }
 
 void PlayCtrl::SetMyData(MyData * data)
@@ -26,21 +26,52 @@ bool PlayCtrl::OpenMedia(const QString & path, MyData::MyMediaWay way, IVideoCal
 {
 	m_curType = way;
 	m_call = call;
-	//´ò¿ª±¾µØÊÓÆµ
+	//ï¿½ò¿ª±ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
 	if (way == MyData::LocalPlay)
 	{
-		if (!m_mt->Open(path.toLocal8Bit(), call, way))
+		//0è¡¨ç¤ºæœ¬åœ°åª’ä½“
+		if (!m_mt->Open(path.toLocal8Bit(), call, 0))
 		{
 			return false;
 		}
 		
 		m_mt->Start();
 	}
+
+	return true;
 }
 
 void PlayCtrl::SetPause(bool isPause)
 {
 	m_mt->SetPause(isPause);
+}
+
+void PlayCtrl::Close()
+{
+	if (m_curType == 0)
+	{
+		m_mt->Close();
+	}
+}
+
+long long PlayCtrl::GetTotalMS() const
+{
+	long long temp = 0;
+	if (m_curType == 0)
+	{
+		temp = m_mt->totalMs;
+	}
+	return temp;
+}
+
+long long PlayCtrl::GetPlayPts() const
+{
+	long long temp = 0;
+	if (m_curType == 0)
+	{
+		temp = m_mt->GetPlayPts();
+	}
+	return temp;
 }
 
 void PlayCtrl::slotPlayEnd()

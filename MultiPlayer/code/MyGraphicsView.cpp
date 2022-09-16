@@ -1,4 +1,4 @@
-#include "MyGraphicsView.h"
+ï»¿#include "MyGraphicsView.h"
 #include <QDebug>
 
 extern "C"
@@ -12,7 +12,7 @@ using namespace std;
 MyGraphicsView::MyGraphicsView(QWidget *parent)
 	: QGraphicsView(parent)
 {
-	setStyleSheet("padding: 0px; border: 0px;");//Ã»ÓÐ¹ö¶¯Ìõ
+	setStyleSheet("padding: 0px; border: 0px;");//Ã»ï¿½Ð¹ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	qgraphicsScene = new MyGraphicsScene(this);
 	setScene(qgraphicsScene);//Sets the current scene to scene. If scene is already being viewed, this function does nothing.
@@ -33,8 +33,8 @@ void MyGraphicsView::SetMyData(MyData * md)
 
 void MyGraphicsView::resizeEvent(QResizeEvent * size)
 {
-	int nwith = this->width() - 3;//»ñÈ¡½çÃæ¿Ø¼þGraphics ViewµÄ¿í¶È
-	int nheight = this->height() - 3;//»ñÈ¡½çÃæ¿Ø¼þGraphics ViewµÄ¸ß¶È
+	int nwith = this->width() - 3;//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½Graphics Viewï¿½Ä¿ï¿½ï¿½
+	int nheight = this->height() - 3;//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½Graphics Viewï¿½Ä¸ß¶ï¿½
 }
 
 void MyGraphicsView::Repaint(AVFrame * image)
@@ -45,13 +45,13 @@ void MyGraphicsView::Repaint(AVFrame * image)
 	}
 	m_data->vW = image->width;
 	m_data->vH = image->height;
-	//±£´æÊÓÆµ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ
 	/*if (m_data->isRecord())
 	{
 		AVFrame *clone = av_frame_clone(image);
 		m_data->PushSaveFrame(clone);
 	}*/
-	//bool isRe = false;//ÅÐ¶ÏÊÇ·ñÐèÒª¸Ä±äsecen´óÐ¡
+	//bool isRe = false;//ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Òªï¿½Ä±ï¿½secenï¿½ï¿½Ð¡
 	if (currentFrame)
 	{
 		/*if (image->width != currentFrame->width
@@ -81,15 +81,15 @@ void MyGraphicsView::Repaint(AVFrame * image)
 		}
 	}
 	auto start = chrono::system_clock::now();
-	//ÂË¾µ´¦Àí
+	//ï¿½Ë¾ï¿½ï¿½ï¿½ï¿½ï¿½
 	//AVFrame *frame = m_data->FilterDeal(image);
 	auto end = chrono::system_clock::now();
 	//auto duration = duration_cast<microseconds>(end - start);
 	auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 	//<< double(duration.count()) * microseconds::period::num / microseconds::period::den
-	cout << "»¨·ÑÁË"
+	cout << "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
 		<< double(duration.count()) / 1000
-		<< "ºÁÃë" << endl;
+		<< "ï¿½ï¿½ï¿½ï¿½" << endl;
 	if (image == NULL)
 		return;
 	QImage *img = MyConvert::AVFrame2QImage(image);
@@ -100,8 +100,8 @@ void MyGraphicsView::Repaint(AVFrame * image)
 	av_frame_free(&image);
 	//if (isRe)
 	//{
-	//	int nwith = this->width() - 3;//»ñÈ¡½çÃæ¿Ø¼þGraphics ViewµÄ¿í¶È
-	//	int nheight = this->height() - 3;//»ñÈ¡½çÃæ¿Ø¼þGraphics ViewµÄ¸ß¶È
+	//	int nwith = this->width() - 3;//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½Graphics Viewï¿½Ä¿ï¿½ï¿½
+	//	int nheight = this->height() - 3;//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½Graphics Viewï¿½Ä¸ß¶ï¿½
 	//	qgraphicsScene->setQGraphicsViewWH(nwith, nheight);
 	//}
 	slotUpdateUI();
