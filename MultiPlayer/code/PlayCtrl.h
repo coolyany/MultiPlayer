@@ -19,6 +19,7 @@ public:
 	bool OpenMedia(const QString &path, MyData::MyMediaWay way, IVideoCall *call);
 
 	void SetPause(bool isPause);//��ͣ
+	void Seek(double pos);
 	void Close();
 
 	long long GetTotalMS() const;//获取总时长

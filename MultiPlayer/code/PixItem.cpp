@@ -1,4 +1,4 @@
-#include "PixItem.h"
+﻿#include "PixItem.h"
 #include <QDebug>
 
 PixItem::PixItem(QPixmap *pixmap)
@@ -28,7 +28,7 @@ void PixItem::paint(QPainter * painter, const QStyleOptionGraphicsItem * option,
 		painter->drawPixmap(-m_pix.width() / 2, -m_pix.height() / 2, m_pix);
 		mut = false;
 
-		qDebug() << "painting .........................";
+		//qDebug() << "painting .........................";
 	}
 }
 
@@ -61,7 +61,7 @@ void PixItem::setPixmap(const QPixmap & pix)
 		this->m_pix = pix;
 		this->mut = false;
 
-		qDebug() << "setPixmap +++++++++++++++++++++++++";
+		//qDebug() << "setPixmap +++++++++++++++++++++++++";
 	}
 }
 

@@ -77,6 +77,7 @@ void XVideoThread::run()
 			if (frame->pts < seekpts)
 			{
 				av_frame_free(&frame);
+				//std::cout << "*******************************" << std::endl;
 				continue;
 			}
 			else
@@ -87,6 +88,7 @@ void XVideoThread::run()
 			if (call)
 			{
 				pts = decode->pts;
+				std::cout << "pts :: " << pts << std::endl;
 				call->Repaint(frame);
 			}
 		}

@@ -21,11 +21,12 @@ public:
 	//�ر��߳�������Դ
 	virtual void Close();
 	virtual void Clear();
+	virtual void Seek(double pos);
+
 	void run();
 	bool isEof();
 	void SetPause(bool isPause);
-	long long GetPlayPts() const;
-
+	long long GetPlayPts() const;//获取视频的pts
 signals:
 	void PlayEnd();
 
@@ -40,5 +41,5 @@ private:
 	XVideoThread *m_vt = nullptr;
 	std::mutex mux;
 	int m_pt = 0;//播放类型 0 本地文件 1 网络文件
-
+	bool isSeeking = false;
 };

@@ -43,6 +43,9 @@ void MultiPlayer::SignConnect()
 	connect(ui.menu_media, &QMenu::triggered, this, &MultiPlayer::onClickActMedia);
 	connect(m_pc, &PlayCtrl::playEnd, this, &MultiPlayer::slotPlayEnd);
 	connect(ui.pushButton_play, &QPushButton::clicked, this, &MultiPlayer::slotPlayAndPause);
+	connect(ui.horizontalSlider, &QAbstractSlider::sliderPressed, this, &MultiPlayer::slotSliderPressed);
+	connect(ui.horizontalSlider, &QAbstractSlider::sliderReleased, this, &MultiPlayer::slotSliderReleased);
+
 }
 
 void MultiPlayer::onClickActMedia(QAction *act)
@@ -54,8 +57,9 @@ void MultiPlayer::onClickActMedia(QAction *act)
 		m_pc->Close();
 
 		playLocalMedia();
-		ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
-		m_isPause = false;
+		//ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
+		//m_isPause = false;
+
 	}
 
 
@@ -93,6 +97,21 @@ void MultiPlayer::slotPlayAndPause()
 	m_pc->SetPause(m_isPause);
 }
 
+void MultiPlayer::slotSliderPressed()
+{
+	isSliderPress = true;
+}
+
+void MultiPlayer::slotSliderReleased()
+{
+	isSliderPress = false;
+	double pos = 0.0;
+	pos = (double)ui.horizontalSlider->value() / (double)ui.horizontalSlider->maximum();
+	seek_value = ui.horizontalSlider->value();
+	if (m_isPlaying)
+		m_pc->Seek(pos);
+}
+
 void MultiPlayer::playLocalMedia()
 {
 	QString path = QFileDialog::getOpenFileName(NULL, "video", ".", "*.mp4 *.avi *.mov *.flv *.mkv *.h264 *.hevc");
@@ -108,7 +127,7 @@ void MultiPlayer::playLocalMedia()
 	}
 	ui.pushButton_play->setIcon(QIcon(":/tool/resource/pause.png"));
 	m_isPause = false;
-
+	m_isPlaying = true;
 	//关闭之前定时器
 	if(timerID != -1) killTimer(timerID);
 	//开启定时器
@@ -139,8 +158,21 @@ void MultiPlayer::timerEvent(QTimerEvent * event)
 			double mediaPos = (double)m_pc->GetPlayPts() / (double)total;
 			//滑动条当前的值，视频播放位置乘滑动条最大值
 			int sliderVal = ui.horizontalSlider->maximum() * mediaPos;
-			qDebug() << "sliderVal :: " << sliderVal;
-			ui.horizontalSlider->setValue(sliderVal);
+			if (seek_value != -1)
+			{
+				//判断如果滑动小于2则不改变视频进度
+				int temp = qAbs(sliderVal - seek_value);
+				if (temp <= 2)
+				{
+					ui.horizontalSlider->setValue(sliderVal);
+					seek_value = -1;
+				}
+			}
+			else
+			{
+				ui.horizontalSlider->setValue(sliderVal);
+			}
+			//ui.horizontalSlider->setValue(sliderVal);
 		}
 		ui.label_pre->setText(Time2Char(m_pc->GetPlayPts()));
 		ui.label_last->setText(Time2Char(total));

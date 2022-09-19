@@ -87,9 +87,9 @@ void MyGraphicsView::Repaint(AVFrame * image)
 	//auto duration = duration_cast<microseconds>(end - start);
 	auto duration = chrono::duration_cast<chrono::microseconds>(end - start);
 	//<< double(duration.count()) * microseconds::period::num / microseconds::period::den
-	cout << "������"
+	/*cout << "������"
 		<< double(duration.count()) / 1000
-		<< "����" << endl;
+		<< "����" << endl;*/
 	if (image == NULL)
 		return;
 	QImage *img = MyConvert::AVFrame2QImage(image);
@@ -110,7 +110,7 @@ void MyGraphicsView::Repaint(AVFrame * image)
 void MyGraphicsView::slotUpdateUI()
 {
 	this->viewport()->update();
-	qDebug() << "************  update  **************";
+	//qDebug() << "************  update  **************";
 }
 
 void MyGraphicsView::mouseMoveEvent(QMouseEvent * event)

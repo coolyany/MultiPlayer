@@ -176,3 +176,35 @@ long long XMediaThread::GetPlayPts() const
 		return 0;
 	
 }
+
+void XMediaThread::Seek(double pos)
+{
+	if (isSeeking)
+		return;
+	isSeeking = true;
+
+	//记录seek前的状态
+	bool status = this->isPause;
+	//先暂停
+	SetPause(true);
+	//清理缓存
+	Clear();
+
+	if (m_media)
+	{
+		if (!m_media->Seek(pos))
+			return;
+	}
+
+	//实际要显示的位置pts
+	int seekPts = pos * m_media->totalMs;
+	if (m_vt) m_vt->seekpts = seekPts;
+
+	//恢复seek前的状态,若不是暂停状态则恢复播放
+	if (!status)
+	{
+		SetPause(false);
+	}
+
+	isSeeking = false;
+}

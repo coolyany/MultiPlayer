@@ -11,6 +11,9 @@ XDecodeThread::XDecodeThread()
 
 XDecodeThread::~XDecodeThread()
 {
+	//等待线程退出
+	isExit = true;
+	wait();
 }
 
 bool XDecodeThread::isPacketsEmpty()
@@ -45,7 +48,7 @@ void XDecodeThread::Push(AVPacket * pkt)
 	//����
 	while (!isExit)
 	{
-		qDebug() << "packs_size:" << packs.size();
+		//qDebug() << "packs_size:" << packs.size();
 		if (packs.size() < maxList)
 		{
 			pmux.lock();

@@ -18,11 +18,14 @@ public:
 public:
 	void init();//initialize the set
 	void SignConnect();//initialize the connect
-//�ۺ���
+//槽函数
 public:
 	void onClickActMedia(QAction *act);
 	void slotPlayEnd();
-	void slotPlayAndPause();//��ͣ�Ͳ���
+	void slotPlayAndPause();//播放/暂停
+	void slotSliderPressed();
+	void slotSliderReleased();
+
 //��������
 public:
 	void playLocalMedia();
@@ -36,6 +39,8 @@ private:
 	PlayCtrl *m_pc = nullptr;
 	bool m_isPause = false;
 	bool isSliderPress = false;
+	int seek_value = -1;
+	bool m_isPlaying = false;
 	//QTimer m_timer;
 	int timerID = -1;
 private:

@@ -200,3 +200,25 @@ AVPacket * XMedia::Read()
 
 	return pkt;
 }
+
+bool XMedia::Seek(double pos)
+{
+	mux.lock();
+	//若上下文不存在,则退出
+	if (!ic)
+	{
+		mux.unlock();
+		return false;
+	}
+	long long seekpos = 0;
+	seekpos = ic->streams[videoStream]->duration * pos;//视频总时长除以滑动条位置
+	int re = av_seek_frame(ic, videoStream, seekpos, AVSEEK_FLAG_BACKWARD | AVSEEK_FLAG_FRAME);
+	mux.unlock();
+
+	if (re < 0)
+	{
+		//qDebug() << ""
+		return false;
+	}
+	return true;
+}

@@ -46,6 +46,14 @@ void PlayCtrl::SetPause(bool isPause)
 	m_mt->SetPause(isPause);
 }
 
+void PlayCtrl::Seek(double pos)
+{
+	if (m_curType == MyData::LocalPlay)
+	{
+		m_mt->Seek(pos);
+	}
+}
+
 void PlayCtrl::Close()
 {
 	if (m_curType == 0)

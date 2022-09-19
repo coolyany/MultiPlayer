@@ -21,6 +21,7 @@ public:
 	//�ռ���Ҫ�����ͷţ��ͷ�AVPacket����ռ䣬�����ݿռ� av_packet_free
 	virtual AVPacket *Read();
 
+	virtual bool Seek(double pos);
 public:
 	int totalMs = 0;
 	int width = 0;
